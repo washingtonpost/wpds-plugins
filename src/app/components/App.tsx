@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Btn from "./btn";
 import axios from "axios";
 axios.defaults.timeout = 30 * 1000;
 import "../styles/ui.css";
 import LinkIcon from "./LinkIcon";
 import WP from "./WP";
-import { copyImageToClipboard } from "copy-image-clipboard";
+// import { copyImageToClipboard } from "copy-image-clipboard";
 
 export default function App() {
   const [ArticleLink, setArticleLink] = useState(null);
@@ -13,7 +13,7 @@ export default function App() {
   const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(false);
   const [CanMap, setCanMap] = useState(true);
-  const imageElem = useRef();
+  //   const imageElem = useRef();
   // const [dataArray, setdataArray] = useState(null);
   useEffect(() => {
     window.onmessage = (event) => {
@@ -58,19 +58,20 @@ export default function App() {
   //         console.log(error);
   //     }
   //   };
-
-  async function copyImage() {
-    const imageURL = new URL(Data.ledeArt ? Data.ledeArt.split(",")[0] : "");
-    const src = imageURL.searchParams.get("src").split("&")[0];
-    try {
-      copyImageToClipboard(
-        "https://www.washingtonpost.com/resizer/BjxDvcyi2_mxFUu8WWqI_bjsA10=/1344x756/filters:quality(80)/posttv-thumbnails-prod.s3.amazonaws.com/01-07-2021/t_811d0d28e559444594ac5a5088fe8bde_name_e3257eb6_507f_11eb_a1f5_fdaf28cfca90.jpg"
-      );
-      console.log("Copied");
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //CORS issue because request from figma is null it will flag it and wont allow
+  // cross origin from null.
+  //   async function copyImage() {
+  //     const imageURL = new URL(Data.ledeArt ? Data.ledeArt.split(",")[0] : "");
+  //     const src = imageURL.searchParams.get("src").split("&")[0];
+  //     try {
+  //       copyImageToClipboard(
+  //         "https://www.washingtonpost.com/resizer/BjxDvcyi2_mxFUu8WWqI_bjsA10=/1344x756/filters:quality(80)/posttv-thumbnails-prod.s3.amazonaws.com/01-07-2021/t_811d0d28e559444594ac5a5088fe8bde_name_e3257eb6_507f_11eb_a1f5_fdaf28cfca90.jpg"
+  //       );
+  //       console.log("Copied");
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
   const onFetch = async () => {
     try {
       setLoading(true);
@@ -154,7 +155,7 @@ export default function App() {
             </Btn>
           </div>
           <div className="divider" />
-          <div className="grid items-center">
+          {/* <div className="grid items-center">
             <div className="w-100">
               <h3 className="font-bold">LedeArt:</h3>
               <img
@@ -170,7 +171,7 @@ export default function App() {
                 Copy to clipboard
               </Btn>
             }
-          </div>
+          </div> */}
           <div className="divider" />
           <div className="grid items-center">
             <div>
