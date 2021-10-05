@@ -1,7 +1,10 @@
 # TWP Data mapper for (figma)
 
+[Install Plugin](https://www.figma.com/community/plugin/1027021863605535783/TWP-Data-Mapper)
 
-This tool is a plugin made for designers using figma. It allows the designer to pull data from an article using [Cheerio](https://www.npmjs.com/package/cheerio) to scrape the article looking for data attributes to map data to. The webscraping server lives on heroku [See sample api resonse](https://twp-web-scraper.herokuapp.com/api/fetch?canonical_link=us-policy/2021/09/30/house-democrats-infrastructure-vote/) 
+This tool is a plugin made for designers using figma. It allows the designer to pull data from an article using [Cheerio](https://www.npmjs.com/package/cheerio) to scrape the article looking for data attributes to map data to. The webscraping server lives on heroku 
+
+[See sample api resonse](https://twp-web-scraper.herokuapp.com/api/fetch?canonical_link=us-policy/2021/09/30/house-democrats-infrastructure-vote/) 
 
 Api fetch code on server looks like
 ```import axios from "axios";
