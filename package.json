@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "This plugin template uses Typescript. If you are familiar with Javascript, Typescript will look very familiar. In fact, valid Javascript code is already valid Typescript code.",
 	"license": "ISC",
+	
 	"scripts": {
 		"build": "webpack --mode=production",
 		"build:watch": "webpack --mode=development --watch",
@@ -12,6 +13,7 @@
 		"axios": "^0.21.4",
 		"cheerio": "^1.0.0-rc.10",
 		"copy-image-clipboard": "^2.0.1",
+		"puppeteer": "^10.4.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},
