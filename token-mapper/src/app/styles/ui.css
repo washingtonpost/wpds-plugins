@@ -1,0 +1,71 @@
+:root {
+  --primary: #18a0fb;
+  --onPrimary: white;
+  --secondary: white;
+  --onSecondary: black;
+  --disabled: #b2b2b2;
+  --destructive: #e05534;
+  --borderColor: rgba(0, 0, 0, 0.3);
+}
+html {
+  box-sizing: border-box;
+}
+button {
+  height: 32px;
+  width: 100%;
+  border-radius: 6px;
+  width: auto;
+  padding: 0px 11px;
+  border-style: none;
+  background-color: var(--primary);
+  color: var(--onPrimary);
+}
+
+button.active {
+  border-style: solid;
+  border-color: var(--borderColor);
+  border-width: 2px;
+}
+button.outline {
+  background-color: var(--secondary);
+  color: var(--onSecondary);
+  border-style: solid 2px var(--onSecondary);
+}
+
+input[type="checkbox"] {
+  visibility: hidden;
+}
+input[checked] + label {
+  transform: rotate(360deg);
+  background-color: #000;
+}
+input[checked] + label::before {
+  transform: translateX(90px);
+  background-color: #fff;
+}
+
+label {
+  display: flex;
+  width: 180px;
+  height: 90px;
+  border: 6px solid;
+  border-radius: 99em;
+  position: relative;
+  transition: transform 0.75s ease-in-out;
+  transform-origin: 50% 50%;
+  cursor: pointer;
+}
+
+label::before {
+  transition: transform 0.75s ease;
+  transition-delay: 0.5s;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 12px;
+  left: 12px;
+}
