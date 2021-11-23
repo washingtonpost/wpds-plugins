@@ -9,10 +9,29 @@
 }
 html {
   box-sizing: border-box;
+  font-family: sans-serif;
 }
+
+.grid {
+  display: grid;
+  padding: 16px;
+  width: auto;
+  grid-template-columns: 70% 30%;
+  align-items: center;
+}
+hr {
+  box-shadow: none;
+  height: 1px;
+  width: 100%;
+  border-style: none;
+  background-color: var(--disabled);
+}
+.span-2 {
+  grid-column: span 2;
+}
+
 button {
   height: 32px;
-  width: 100%;
   border-radius: 6px;
   width: auto;
   padding: 0px 11px;
@@ -30,42 +49,4 @@ button.outline {
   background-color: var(--secondary);
   color: var(--onSecondary);
   border-style: solid 2px var(--onSecondary);
-}
-
-input[type="checkbox"] {
-  visibility: hidden;
-}
-input[checked] + label {
-  transform: rotate(360deg);
-  background-color: #000;
-}
-input[checked] + label::before {
-  transform: translateX(90px);
-  background-color: #fff;
-}
-
-label {
-  display: flex;
-  width: 180px;
-  height: 90px;
-  border: 6px solid;
-  border-radius: 99em;
-  position: relative;
-  transition: transform 0.75s ease-in-out;
-  transform-origin: 50% 50%;
-  cursor: pointer;
-}
-
-label::before {
-  transition: transform 0.75s ease;
-  transition-delay: 0.5s;
-  content: "";
-  display: block;
-  position: absolute;
-  width: 54px;
-  height: 54px;
-  background-color: #000;
-  border-radius: 50%;
-  top: 12px;
-  left: 12px;
 }

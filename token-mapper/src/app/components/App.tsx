@@ -24,14 +24,15 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className="grid">
+      <p>Change mode</p>
       <button
         className={`${Mode ? "active" : ""}`}
         onClick={() => ToggleTheme(!Mode)}
       >
-        Change Mode
+        Change
       </button>
-      {/* <Toggle/> */}
+      <hr className="span-2" />
     </div>
   );
 }
