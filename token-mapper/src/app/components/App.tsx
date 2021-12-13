@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // import Toggle from "./toggle";
 import "../styles/ui.css";
 // import tokenData from "../../wpds.tokens.json";
 
 export default function App() {
-  const [Mode, setMode] = useState(false);
-
   //Toggles theme
   function ToggleTheme(mode: boolean) {
-    setMode(mode);
     parent.postMessage({ pluginMessage: { type: "toggle", mode: mode } }, "*");
   }
   useEffect(() => {
@@ -25,13 +22,8 @@ export default function App() {
 
   return (
     <div className="grid">
-      <p>Change mode</p>
-      <button
-        className={`${Mode ? "active" : ""}`}
-        onClick={() => ToggleTheme(!Mode)}
-      >
-        Change
-      </button>
+      <button onClick={() => ToggleTheme(true)}>Light Mode</button>
+      <button onClick={() => ToggleTheme(false)}>Dark Mode</button>
       <hr className="span-2" />
     </div>
   );

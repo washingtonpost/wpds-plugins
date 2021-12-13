@@ -101,9 +101,8 @@ async function applyColor(node, mode) {
       }
     }
     if (node.strokeStyleId) {
-      let style = node.strokeStyleId.split(":")[1];
-      let styleSub = style.split(",")[0];
-      let styleID = styleSub;
+      let styleID = node.strokeStyleId.split(":")[1];
+
       SendMessage(styleID);
       if (styleID) {
         const currentStyle: BaseStyle = await figma.importStyleByKeyAsync(
@@ -168,56 +167,54 @@ function SendMessage(Error: String) {
 //       }, []);
 // }
 
-/**Only uncomment below if you are rebuilding wpds.tokens.json file
- * The following will export the local color styles into the inspector to be copy and
- * pasted into the wpds.tokens.json. Figma requires all shared library styleIDs to be hard coded
+/**
+ * Below will console log the local color IDs needed to be added to wpds.tokens.json.
+ * Figma requires you hard code the color ids. The format of color IDs use S:[uid] this is needed
+ * when replacing the tokens in wpds.tokens.json.
  */
 
-// BuildTheme();
-//build theme
-// function BuildTheme(){
-//   const collectedStyleDataLight = [];
-//   const collectedStyleDataDark=[];
-//   var colorStyles = figma.getLocalPaintStyles();
-//   if (colorStyles) {
-//       colorStyles.forEach(function (color) {
-//           let name=styleName(color.name);
-//           let key=color.key;
-//           if (name && key) {
-//              if(themeName(color.name).includes("light")){
-//                collectedStyleDataLight.push({name:name,key:key});
-//              }else if(themeName(color.name).includes("dark")){
-//                collectedStyleDataDark.push({name:name,key:key});
-//              }
-//           }
-//           else {
-//               figma.notify('Error adding theme');
-//               throw new Error("Error adding theme");
-//           }
-//       });
-// SendMessage(JSON.stringify(collectedStyleDataLight));
-// SendMessage(JSON.stringify(collectedStyleDataDark));
-//   }
-//   else {
-//       figma.notify('There are no color styles in the document');
-//   }
-// }
-//For building out theme
-// function themeName(name) {
-//   if (name.includes("/")) {
-//     var prefix = name.split("/");
-//     return prefix[0];
-//   } else {
-//     figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
-//   }
-// }
-// //for building out style name
-// function styleName(name) {
-//       if (name.includes('/')) {
-//           var styleName_1 = name.split('/').slice(1).join('.');
-//           return styleName_1;
-//       }
-//       else {
-//           figma.notify('Styles names must be prefixed. Ex: themeName/colorName');
-//       }
-// }
+BuildTheme();
+// build theme
+function BuildTheme() {
+  let collectedStyleDataLight = [];
+  let collectedStyleDataDark = [];
+  var colorStyles = figma.getLocalPaintStyles();
+  if (colorStyles) {
+    colorStyles.forEach(function (color) {
+      let name = styleName(color.name);
+      let key = color.key;
+      if (name && key) {
+        if (themeName(color.name).includes("light")) {
+          collectedStyleDataLight.push({ [name]: `S:${key}` });
+        } else if (themeName(color.name).includes("dark")) {
+          collectedStyleDataDark.push({ [name]: `S:${key}` });
+        }
+      } else {
+        figma.notify("Error adding theme");
+        throw new Error("Error adding theme");
+      }
+    });
+    SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
+    SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
+  } else {
+    figma.notify("There are no color styles in the document");
+  }
+}
+// For building out theme
+function themeName(name) {
+  if (name.includes("/")) {
+    var prefix = name.split("/");
+    return prefix[0];
+  } else {
+    figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
+  }
+}
+//for building out style name
+function styleName(name) {
+  if (name.includes("/")) {
+    var styleName_1 = name.split("/").slice(1).join(".");
+    return styleName_1;
+  } else {
+    figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
+  }
+}
