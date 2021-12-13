@@ -8,6 +8,12 @@ export default function App() {
   function ToggleTheme(mode: boolean) {
     parent.postMessage({ pluginMessage: { type: "toggle", mode: mode } }, "*");
   }
+  function SetBorderRadius(token: number) {
+    parent.postMessage(
+      { pluginMessage: { type: "set-border-radius", token: token } },
+      "*"
+    );
+  }
   useEffect(() => {
     window.onmessage = (event) => {
       const { type, message } = event.data.pluginMessage;
@@ -25,6 +31,7 @@ export default function App() {
       <button onClick={() => ToggleTheme(true)}>Light Mode</button>
       <button onClick={() => ToggleTheme(false)}>Dark Mode</button>
       <hr className="span-2" />
+      <button onClick={() => SetBorderRadius(24)}>125</button>
     </div>
   );
 }

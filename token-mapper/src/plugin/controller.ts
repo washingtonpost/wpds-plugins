@@ -7,6 +7,17 @@ figma.on("selectionchange", async () => {
   if (figma.currentPage.selection.length === 0) {
     return;
   } else {
+    var Shape = figma.currentPage.selection;
+
+    Shape.forEach((child) => {
+      if (child.type === "FRAME" || "RECTANGLE") {
+        const node: FrameNode = child as FrameNode;
+        if (node.cornerRadius !== figma.mixed) {
+          node.cornerRadius = 16;
+          SendMessage(`${node.cornerRadius}`);
+        }
+      }
+    });
   }
 });
 
@@ -35,11 +46,32 @@ figma.ui.onmessage = async (msg) => {
     case "toggle":
       ToggleTheme(nodes, msg.mode);
       break;
+    case "set-border-radius":
+      SetBorderRadius(nodes, msg.token);
     default:
       break;
   }
 };
 
+//Sets border radius
+function SetBorderRadius(nodes, token) {
+  let success = false;
+  nodes.forEach((child) => {
+    if (child.type === "FRAME" || "RECTANGLE") {
+      const node: FrameNode = child as FrameNode;
+      if (node.cornerRadius !== figma.mixed) {
+        node.cornerRadius = token;
+        success = true;
+        SendMessage(`Border Set to ${token}`);
+      } else {
+        success = true;
+        figma.notify("🧐 This element has multiple radius and was not set");
+      }
+    }
+  });
+  if (!success)
+    figma.notify("🙏 Please select a Rectangle or a Frame and tying again");
+}
 //Toggles the theme by cycling through the nodes
 function ToggleTheme(nodes, mode: boolean) {
   nodes.forEach((node) => {
@@ -147,25 +179,6 @@ function SendMessage(Error: String) {
   };
   figma.ui.postMessage(message);
 }
-
-// /*Filters selection based on node type*/
-// function filterData(data, predicate) {
-//   return !!!data
-//     ? null
-//     : data.reduce((list, entry) => {
-//         let clone = null;
-//         if (predicate(entry)) {
-//           clone = entry;
-//           list.push(clone);
-//         } else if (entry.children != null) {
-//           let children = filterData(entry.children, predicate);
-//           if (children.length > 0) {
-//             list.push(...children);
-//           }
-//         }
-//         return list;
-//       }, []);
-// }
 
 /**
  * Below will console log the local color IDs needed to be added to wpds.tokens.json.
