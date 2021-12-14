@@ -28,6 +28,11 @@
   resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.24.0.tgz#4e57fa6acfbab24992acde8ca5355b76f2a5e947"
   integrity sha512-KpEq/C1jMtNiO5yO1nVLn/cQhz4AHPzBfokwd93Z/4DYqJ2JR8z5jrGTt3SMNi2m0KsjND/D3wpxSofBm1WaBA==
 
+"@stitches/react@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.6.tgz#61f2a3d1110334ecd33bcb7463650127d42470cb"
+  integrity sha512-gRVITYj8W4jJmoiVxWDv72yCvd12VvtUUAnTzs07EqmtvGCVgKZu3Dx0x5KVCcb0b6tfgvvNH2L84YrzdM4Mag==
+
 "@types/json-schema@^7.0.6":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
