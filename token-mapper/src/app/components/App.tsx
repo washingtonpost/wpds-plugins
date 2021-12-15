@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import Toggle from "./toggle";
 import "../styles/ui.css";
-import { styled } from "@stitches/react";
+import Button from "./buttonPop";
+import PopOverSearch from "./popOverSearch";
 // import tokenData from "../../wpds.tokens.json";
 
 export default function App() {
-  const Box = styled("div", {
-    backgroundColor: "Chocolate",
-    height: "64px",
-    width: "64px",
-  });
-  //Toggles theme
-  function ToggleTheme(mode: boolean) {
-    parent.postMessage({ pluginMessage: { type: "toggle", mode: mode } }, "*");
-  }
-  function SetBorderRadius(token: number) {
-    parent.postMessage(
-      { pluginMessage: { type: "set-border-radius", token: token } },
-      "*"
-    );
-  }
+  const [Active, setActive] = useState(false);
+
+  // function ToggleTheme(mode: boolean) {
+  //   parent.postMessage({ pluginMessage: { type: "toggle", mode: mode } }, "*");
+  // }
+  // function SetBorderRadius(token: number) {
+  //   parent.postMessage(
+  //     { pluginMessage: { type: "set-border-radius", token: token } },
+  //     "*"
+  //   );
+  // }
   useEffect(() => {
     window.onmessage = (event) => {
       const { type, message } = event.data.pluginMessage;
@@ -33,12 +30,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="grid">
-      <button onClick={() => ToggleTheme(true)}>Light Mode</button>
-      <button onClick={() => ToggleTheme(false)}>Dark Mode</button>
-      <hr className="span-2" />
-      <button onClick={() => SetBorderRadius(24)}>125</button>
-      <Box />
+    <div style={{ position: "relative" }}>
+      <Button onClick={() => setActive(true)}>Mixed</Button>
+      <PopOverSearch setActive={setActive} isActive={Active} title="Title" />
     </div>
   );
 }
