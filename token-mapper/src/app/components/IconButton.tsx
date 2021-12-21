@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled, theme } from "../../stitches.config";
-export default function IconButton({ onClick }) {
-  const [isActive, setIsActive] = useState(false);
-
+export default function IconButton({ onClick, isActive }) {
   function handleClick() {
-    setIsActive(true);
     onClick();
   }
   const IconButton = styled("button", {
