@@ -7,17 +7,6 @@ figma.on("selectionchange", async () => {
   if (figma.currentPage.selection.length === 0) {
     return;
   } else {
-    var Shape = figma.currentPage.selection;
-
-    Shape.forEach((child) => {
-      if (child.type === "FRAME" || "RECTANGLE") {
-        const node: FrameNode = child as FrameNode;
-        if (node.cornerRadius !== figma.mixed) {
-          node.cornerRadius = 16;
-          SendMessage(`${node.cornerRadius}`);
-        }
-      }
-    });
   }
 });
 
@@ -46,12 +35,77 @@ figma.ui.onmessage = async (msg) => {
     case "toggle":
       ToggleTheme(nodes, msg.mode);
       break;
+    case "set-font-size":
+      SetFontSize(nodes, msg.token);
+      break;
+    case "set-line-height":
+      SetLineHeight(nodes, msg.token);
+      break;
     case "set-border-radius":
       SetBorderRadius(nodes, msg.token);
     default:
       break;
   }
 };
+
+//set font size
+function SetFontSize(nodes, token) {
+  try {
+    nodes.forEach(async (child) => {
+      const node: TextNode = child as TextNode;
+      if (child.type === "TEXT") {
+        if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
+          await figma.loadFontAsync(node.fontName);
+          node.fontSize = token;
+          SendMessage(`Font size Set to ${token}`);
+        } else {
+          figma.notify(
+            "⚠️ 1 or more element had mixed font styles and was not changed."
+          );
+          // const fonts = child.getRangeAllFontNames(0, node.characters.length);
+          // for (const font of fonts) {
+          //   await figma.loadFontAsync(font);
+          // }
+        }
+      } else {
+        throw Error;
+      }
+    });
+  } catch (error) {
+    figma.notify(
+      "⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
+    );
+  }
+}
+//set font size
+function SetLineHeight(nodes, token) {
+  try {
+    nodes.forEach(async (child) => {
+      if (child.type === "TEXT") {
+        const node: TextNode = child as TextNode;
+        if (
+          node.lineHeight != figma.mixed &&
+          node.fontSize != figma.mixed &&
+          node.fontName != figma.mixed
+        ) {
+          await figma.loadFontAsync(node.fontName);
+          node.lineHeight = { unit: "PIXELS", value: token * node.fontSize };
+          SendMessage(`Font size Set to ${token}`);
+        } else {
+          figma.notify(
+            "⚠️ One or more items have mixed font styles and was not set"
+          );
+        }
+      } else {
+        throw Error;
+      }
+    });
+  } catch (error) {
+    figma.notify(
+      "⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
+    );
+  }
+}
 
 //Sets border radius
 function SetBorderRadius(nodes, token) {
