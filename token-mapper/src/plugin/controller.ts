@@ -7,53 +7,89 @@ figma.on("selectionchange", async () => {
   if (figma.currentPage.selection.length === 0) {
     return;
   } else {
+    let nodes = SelectNodes(false);
+    InspectElements(nodes);
   }
 });
+
+function InspectElements(nodes) {
+  try {
+    nodes.forEach(async (child) => {
+      switch (child.type) {
+        case "TEXT":
+          figma.notify("Type is a text");
+          const node: TextNode = child as TextNode;
+          let childFontSize;
+          if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
+            await figma.loadFontAsync(node.fontName);
+            childFontSize = node.fontSize;
+          }
+          for (var token in tokenData.fontSize) {
+            if (tokenData[token].hasOwnProperty("value")) {
+            }
+          }
+          break;
+        default:
+          figma.notify("Type is a non-text element");
+      }
+    });
+  } catch (error) {
+    figma.notify("⛔️ Error could not determine element type ");
+  }
+}
 
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
   let nodes;
 
-  //if the user selected something
-  if (figma.currentPage.selection.length > 0) {
-    nodes = figma.currentPage.selection;
-  }
-  //if the user did not select but there are elements on the page
-  else if (
-    figma.currentPage.children &&
-    figma.currentPage.selection.length == 0
-  ) {
-    nodes = figma.currentPage.children;
-  }
-  //if nothing please notify the user to make a selection
-  else {
-    figma.notify("🙏  Please make a selection");
-    return; //Stop the plugin
-  }
-
   switch (msg.type) {
     case "toggle":
+      nodes = SelectNodes(true);
       ToggleTheme(nodes, msg.mode);
       break;
     case "set-font-size":
+      nodes = SelectNodes(false);
       SetFontSize(nodes, msg.token);
       break;
     case "set-line-height":
+      nodes = SelectNodes(false);
       SetLineHeight(nodes, msg.token);
       break;
     case "set-border-radius":
+      nodes = SelectNodes(false);
       SetBorderRadius(nodes, msg.token);
     default:
       break;
   }
 };
 
+function SelectNodes(EnablePageSelection: boolean) {
+  //if the user selected something
+  if (figma.currentPage.selection.length > 0) {
+    return figma.currentPage.selection;
+  }
+  //if the user did not select but there are elements on the page and page
+  //selection is allowed
+  else if (
+    figma.currentPage.children &&
+    figma.currentPage.selection.length == 0 &&
+    EnablePageSelection
+  ) {
+    return figma.currentPage.children;
+  }
+  //if nothing please notify the user to make a selection
+  else {
+    figma.notify("🙏  Please make a selection");
+    return null; //Stop the plugin
+  }
+}
+
 //set font size
 function SetFontSize(nodes, token) {
   try {
     nodes.forEach(async (child) => {
-      const node: TextNode = child as TextNode;
       if (child.type === "TEXT") {
+        const node: TextNode = child as TextNode;
         if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
           await figma.loadFontAsync(node.fontName);
           node.fontSize = token;
@@ -126,6 +162,7 @@ function SetBorderRadius(nodes, token) {
   if (!success)
     figma.notify("🙏 Please select a Rectangle or a Frame and tying again");
 }
+
 //Toggles the theme by cycling through the nodes
 function ToggleTheme(nodes, mode: boolean) {
   nodes.forEach((node) => {
@@ -261,8 +298,8 @@ function BuildTheme() {
         throw new Error("Error adding theme");
       }
     });
-    SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
-    SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
+    // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
+    // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
   } else {
     figma.notify("There are no color styles in the document");
   }
