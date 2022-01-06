@@ -317,8 +317,8 @@ function BuildTheme() {
         throw new Error("Error adding theme");
       }
     });
-    SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
-    SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
+    // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
+    // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
   } else {
     figma.notify("There are no color styles in the document");
   }
