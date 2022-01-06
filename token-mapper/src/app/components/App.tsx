@@ -85,7 +85,7 @@ export default function App() {
       <Section
         title="Theme"
         tokens={ThemeSwitchTokens}
-        command="theme-toggle"
+        command="set-theme"
         setInFigma={SetThemeInFigma}
       >
         Selecting dark or light will change all of the colors on the page to

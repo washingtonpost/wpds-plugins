@@ -43,9 +43,9 @@ figma.ui.onmessage = async (msg) => {
   let nodes;
 
   switch (msg.type) {
-    case "toggle":
+    case "set-theme":
       nodes = SelectNodes(true);
-      ToggleTheme(nodes, msg.mode);
+      ToggleTheme(nodes, msg.token);
       break;
     case "set-font-size":
       nodes = SelectNodes(false);
@@ -196,17 +196,22 @@ async function applyColor(node, mode) {
   ) {
     if (node.fillStyleId) {
       let style = node.fillStyleId.split(":")[1];
-      let styleSub = style.split(",")[0];
-      let styleID = styleSub;
-      SendMessage(styleID);
+      let styleID;
+      if (style.includes(",")) {
+        let styleSub = style.split(",")[0];
+        styleID = styleSub;
+      } else {
+        styleID = style;
+      }
+
       if (styleID) {
         const currentStyle: BaseStyle = await figma.importStyleByKeyAsync(
           styleID
         ); //fetch current style
         if (currentStyle) {
           let currentStyleName = currentStyle.name; //get current style name
-          let tokenName = currentStyleName.split("/")[1]; //split name from dark/ or light/
-
+          let tokenName = currentStyleName.split("/")[1]; //TODO set to capture last word in sequence
+          SendMessage(tokenName);
           //if dark mode look in light colors if light look in dark
           const _matchingStyles = mode
             ? tokenData["color"]["light"]
@@ -218,35 +223,49 @@ async function applyColor(node, mode) {
             _matchingStyleID
           );
           if (_matchedStyle) {
+            SendMessage(_matchedStyle.id);
             node.fillStyleId = _matchedStyle.id;
+          } else {
+            SendError(`No match found for ${_matchedStyle.id}`);
           }
         }
       }
     }
     if (node.strokeStyleId) {
-      let styleID = node.strokeStyleId.split(":")[1];
+      let style = node.strokeStyleId.split(":")[1];
+      let styleID;
+      if (style.includes(",")) {
+        let styleSub = style.split(",")[0];
+        styleID = styleSub;
+      } else {
+        styleID = style;
+      }
 
-      SendMessage(styleID);
       if (styleID) {
         const currentStyle: BaseStyle = await figma.importStyleByKeyAsync(
           styleID
-        ); //fetch current style
+        );
+        //fetch current style
         if (currentStyle) {
           let currentStyleName = currentStyle.name; //get current style name
           let tokenName = currentStyleName.split("/")[1]; //split name from dark/ or light/
-
+          SendMessage(tokenName);
           //if dark mode look in light colors if light look in dark
           const _matchingStyles = mode
             ? tokenData["color"]["light"]
             : tokenData["color"]["dark"];
 
           //Look for matching style based on matching style id
-          const _matchingStyleID = _matchingStyles[tokenName].split(":")[1];
+          let _matchingStyleID = _matchingStyles[tokenName].split(":")[1];
+
           const _matchedStyle: BaseStyle = await figma.importStyleByKeyAsync(
             _matchingStyleID
           );
           if (_matchedStyle) {
+            SendMessage(_matchedStyle.id);
             node.strokeStyleId = _matchedStyle.id;
+          } else {
+            SendError(`No match found for ${_matchedStyle.id}`);
           }
         }
       }
@@ -298,8 +317,8 @@ function BuildTheme() {
         throw new Error("Error adding theme");
       }
     });
-    // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
-    // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
+    SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
+    SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
   } else {
     figma.notify("There are no color styles in the document");
   }
