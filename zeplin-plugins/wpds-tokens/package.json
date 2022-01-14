@@ -1,7 +1,7 @@
 {
   "name": "wpds-tokens",
-  "version": "0.1.0",
-  "description": "Maps wpds tokens in design files not yet supported by zeplin. (Shadows, Font-size, border-radius, line-height, letter-spacing, size)",
+  "version": "0.1.1",
+  "description": "Maps wpds (Washington Post Design System) tokens in design files not yet supported by zeplin. (Shadows, Font-size, border-radius, line-height, letter-spacing, size)",
   "sideEffects": false,
   "scripts": {
     "start": "zem start",

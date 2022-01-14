@@ -9,11 +9,9 @@ import {
   fontWeights,
   lineHeights,
   shadows,
-  fonts,
 } from "@washingtonpost/ui-theme/dist/esm/dist/tokens";
 const intBase = parseInt(base.split("px")[0]);
 function layer(context, selectedLayer) {
-  // console.log(selectedLayer);
   let borderRadius;
   let shadow;
   let fontSize;
@@ -88,7 +86,6 @@ function handleShadow(selectedLayer) {
   if (selectedLayer.shadows.length == 0) return;
   const shadow = selectedLayer.shadows[0];
   let checkValue = `${shadow.offsetX}px ${shadow.offsetY}px ${shadow.blurRadius}px ${shadow.spread}px`;
-  console.log(checkValue);
   let valueToReturn = "Unsupported Token";
   for (var token in shadows) {
     if (shadows[token].includes(`${checkValue}`)) {
@@ -124,51 +121,12 @@ function handleLineHeight(selectedLayer) {
   return valueToReturn;
 }
 
-function screen(context, selectedVersion, selectedScreen) {}
-
-function component(context, selectedVersion, selectedComponent) {}
-
-function colors(context) {}
-
-function textStyles(context) {}
-
-function spacing(context) {}
-
-function exportColors(context) {}
-
-function exportTextStyles(context) {}
-
-function exportSpacing(context) {}
-
 /**
  * The following functions will be deprecated. Your extensions can export them to support old versions of Zeplin's macOS app.
  * See Zeplin Extensions migration guide for details:
  * https://zpl.io/shared-styleguides-extensions-migration-guide
  */
 
-function styleguideColors(context, colors) {}
-
-function styleguideTextStyles(context, textStyles) {}
-
-function exportStyleguideColors(context, colors) {}
-
-function exportStyleguideTextStyles(context, textStyles) {}
-
-function comment(context, text) {}
-
 export default {
   layer,
-  screen,
-  component,
-  colors,
-  textStyles,
-  spacing,
-  exportColors,
-  exportTextStyles,
-  exportSpacing,
-  styleguideColors,
-  styleguideTextStyles,
-  exportStyleguideColors,
-  exportStyleguideTextStyles,
-  comment,
 };
