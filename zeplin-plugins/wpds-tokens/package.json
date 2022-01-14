@@ -12,7 +12,7 @@
     "publish": "zem publish"
   },
   "zeplin": {
-    "displayName": "Wpds Tokens",
+    "displayName": "WPDS Tokens",
     "platforms": [
       "web"
     ]
