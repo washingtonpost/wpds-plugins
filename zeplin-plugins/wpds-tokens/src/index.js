@@ -9,7 +9,7 @@ import {
   fontWeights,
   lineHeights,
   shadows,
-} from "@washingtonpost/ui-theme/dist/esm/dist/tokens";
+} from "@washingtonpost/wpds-theme/src/tokens.ts";
 const intBase = parseInt(base.split("px")[0]);
 function layer(context, selectedLayer) {
   let borderRadius;
@@ -58,7 +58,7 @@ function handleBorderRadius(selectedLayer) {
 function handleFontSize(selectedLayer) {
   if (selectedLayer.textStyles.length == 0) return;
   let checkValue = selectedLayer.textStyles[0].textStyle.fontSize / intBase;
-  let valueToReturn = "Unsupported Token";
+  let valueToReturn = `${checkValue}px`;
   for (var token in fontSizes) {
     if (fontSizes[token] == `${checkValue}rem`) {
       valueToReturn = `$${token}`;
@@ -71,7 +71,7 @@ function handleFontSize(selectedLayer) {
 function handleFont(selectedLayer) {
   if (selectedLayer.textStyles.length == 0) return;
   let checkValue = selectedLayer.textStyles[0].textStyle.fontFamily;
-  let valueToReturn = "Unsupported Token";
+  let valueToReturn = checkValue;
   if (checkValue.includes("Postoni")) {
     valueToReturn = "$headline";
   } else if (checkValue.includes("georgia")) {
@@ -86,7 +86,7 @@ function handleShadow(selectedLayer) {
   if (selectedLayer.shadows.length == 0) return;
   const shadow = selectedLayer.shadows[0];
   let checkValue = `${shadow.offsetX}px ${shadow.offsetY}px ${shadow.blurRadius}px ${shadow.spread}px`;
-  let valueToReturn = "Unsupported Token";
+  let valueToReturn = checkValue;
   for (var token in shadows) {
     if (shadows[token].includes(`${checkValue}`)) {
       valueToReturn = `$${token}`;
@@ -97,7 +97,7 @@ function handleShadow(selectedLayer) {
 function handleFontWeight(selectedLayer) {
   if (selectedLayer.textStyles.length == 0) return;
   let checkValue = selectedLayer.textStyles[0].textStyle.fontWeight;
-  let valueToReturn = "Unsupported Token";
+  let valueToReturn = checkValue;
   for (var token in fontWeights) {
     if (fontWeights[token] == checkValue) {
       valueToReturn = `$${token}`;
@@ -112,11 +112,18 @@ function handleLineHeight(selectedLayer) {
   let checkValue =
     selectedLayer.textStyles[0].textStyle.lineHeight /
     selectedLayer.textStyles[0].textStyle.fontSize;
-  let valueToReturn = "Unsupported Token";
+  let valueToReturn = checkValue.toFixed(2);
   for (var token in lineHeights) {
     if (lineHeights[token] == checkValue.toFixed(2)) {
       valueToReturn = `$${token}`;
     }
+  }
+  if (
+    valueToReturn == undefined ||
+    valueToReturn == "NaN" ||
+    valueToReturn == NaN
+  ) {
+    valueToReturn = "auto";
   }
   return valueToReturn;
 }
