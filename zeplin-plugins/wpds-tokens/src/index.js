@@ -11,29 +11,44 @@ import {
   shadows,
 } from "@washingtonpost/wpds-theme/src/tokens.ts";
 const intBase = parseInt(base.split("px")[0]);
+
 function layer(context, selectedLayer) {
+  if (selectedLayer.type == "text") {
+    return handleTextType(selectedLayer);
+  } else {
+    if (selectedLayer) {
+      return handleShapeType(selectedLayer);
+    } else {
+      return "Select a layer to see the tokens";
+    }
+  }
+}
+
+//Handles shape and group layers
+function handleShapeType(selectedLayer) {
   let borderRadius;
   let shadow;
+  borderRadius = handleBorderRadius(selectedLayer);
+  shadow = handleShadow(selectedLayer);
+  let data = {
+    borderRadius: borderRadius,
+    boxShadow: shadow,
+  };
+  return { code: JSON.stringify(data, null, 2), language: "json" };
+}
+
+//Handles text layers
+function handleTextType(selectedLayer) {
   let fontSize;
   let font;
   let lineHeight;
   let fontWeight;
-
-  if (selectedLayer.type == "shape" || selectedLayer.type == "group") {
-    borderRadius = handleBorderRadius(selectedLayer);
-  }
-  if (selectedLayer.type == "text") {
-    fontSize = handleFontSize(selectedLayer);
-    font = handleFont(selectedLayer);
-    lineHeight = handleLineHeight(selectedLayer);
-    fontWeight = handleFontWeight(selectedLayer);
-  }
-
-  shadow = handleShadow(selectedLayer);
+  fontSize = handleFontSize(selectedLayer);
+  font = handleFont(selectedLayer);
+  lineHeight = handleLineHeight(selectedLayer);
+  fontWeight = handleFontWeight(selectedLayer);
 
   let data = {
-    borderRadius: borderRadius,
-    boxShadow: shadow,
     fontFamily: font,
     fontSize: fontSize,
     fontWeight: fontWeight,
@@ -127,7 +142,6 @@ function handleLineHeight(selectedLayer) {
   }
   return valueToReturn;
 }
-
 /**
  * The following functions will be deprecated. Your extensions can export them to support old versions of Zeplin's macOS app.
  * See Zeplin Extensions migration guide for details:
@@ -136,4 +150,5 @@ function handleLineHeight(selectedLayer) {
 
 export default {
   layer,
+  component,
 };
