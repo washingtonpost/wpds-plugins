@@ -138,7 +138,7 @@ function handleLineHeight(selectedLayer) {
     valueToReturn == "NaN" ||
     valueToReturn == NaN
   ) {
-    valueToReturn = "auto";
+    return;
   }
   return valueToReturn;
 }
@@ -150,5 +150,4 @@ function handleLineHeight(selectedLayer) {
 
 export default {
   layer,
-  component,
 };
