@@ -13,15 +13,42 @@ import {
 const intBase = parseInt(base.split("px")[0]);
 
 function layer(context, selectedLayer) {
+  // if first item in array has "Icon" in it then next layer should have icon name
+  // infer the name of the icon
+  // import Asset from "@washingtonpost/wpds-assets/chevron-right";
+  // <Asset />
   if (selectedLayer.type == "text") {
     return handleTextType(selectedLayer);
   } else {
     if (selectedLayer) {
-      return handleShapeType(selectedLayer);
+      if (selectedLayer?.version?.componentNames[0].includes("Icon")) {
+        return handleIconType(selectedLayer);
+      } else {
+        return handleShapeType(selectedLayer);
+      }
     } else {
       return "Select a layer to see the tokens";
     }
   }
+}
+
+function handleIconType(selectedLayer) {
+  const iconName = selectedLayer.version.componentNames[1];
+  const size = selectedLayer.version.componentNames[0].split("Icon / ")[1];
+
+  return {
+    code: `import Asset from "@washingtonpost/wpds-assets/asset/${iconName}";
+import { Icon } from "@washingtonpost/wpds-ui-kit";
+
+function Asset() {
+  return (
+    <Icon size={"${size}"}>
+      <Asset />
+    </Icon>
+  );
+}`,
+    language: "javascript",
+  };
 }
 
 //Handles shape and group layers
