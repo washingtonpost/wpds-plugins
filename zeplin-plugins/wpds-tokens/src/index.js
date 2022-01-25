@@ -13,10 +13,6 @@ import {
 const intBase = parseInt(base.split("px")[0]);
 
 function layer(context, selectedLayer) {
-  // if first item in array has "Icon" in it then next layer should have icon name
-  // infer the name of the icon
-  // import Asset from "@washingtonpost/wpds-assets/chevron-right";
-  // <Asset />
   if (selectedLayer.type == "text") {
     return handleTextType(selectedLayer);
   } else {
