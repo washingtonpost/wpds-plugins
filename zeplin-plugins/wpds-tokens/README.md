@@ -1,6 +1,6 @@
-# Wpds Tokens
+# WPDS Tokens
 
-Maps wpds (Washington Post Design System) tokens in design files not yet supported by zeplin. (Shadows, Font-size, border-radius, line-height, letter-spacing, size). The output results in tokens formatted in a stitches syntax for developer to copy and paste with ease.
+Maps WPDS (Washington Post Design System) tokens in design files not yet supported by zeplin. (Shadows, Font-size, border-radius, line-height, letter-spacing, size). The output results in tokens formatted in a stitches syntax for developer to copy and paste with ease.
 
 ## Getting started
 
