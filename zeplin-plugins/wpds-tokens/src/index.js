@@ -42,7 +42,7 @@ import { Icon } from "@washingtonpost/wpds-ui-kit";
 
 function Asset() {
   return (
-    <Icon size="${size}px">
+    <Icon size="${size}">
       <Asset />
     </Icon>
   );
