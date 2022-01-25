@@ -8,12 +8,12 @@ Add the extension to your project from [extensions.zeplin.io](https://extensions
 
 ## Output
 
-```
+```json
 {
- fontSize:$100,
- fontWeight:$bold,
- lineHeight:$110,
- fontFamily:$meta
+  "fontSize": "$100",
+  "fontWeight": "$bold",
+  "lineHeight": "$110",
+  "fontFamily": "$meta"
 }
 ```
 
