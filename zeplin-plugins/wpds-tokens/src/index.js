@@ -83,6 +83,9 @@ function handleTextType(selectedLayer) {
 
 function handleBorderRadius(selectedLayer) {
   if (selectedLayer.borderRadius == 0) return;
+  if (selectedLayer.borderRadius === 9999) {
+    return `$round`;
+  }
   let checkValue = selectedLayer.borderRadius / intBase;
   let valueToReturn = "Unsupported Token";
   for (var token in radii) {
