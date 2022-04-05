@@ -7,36 +7,37 @@ figma.on("selectionchange", async () => {
   if (figma.currentPage.selection.length === 0) {
     return;
   } else {
-    let nodes = SelectNodes(false);
-    InspectElements(nodes);
+    // let nodes = SelectNodes(false);
+    // InspectElements(nodes);
   }
 });
 
-function InspectElements(nodes) {
-  try {
-    nodes.forEach(async (child) => {
-      switch (child.type) {
-        case "TEXT":
-          figma.notify("Type is a text");
-          const node: TextNode = child as TextNode;
-          let childFontSize;
-          if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
-            await figma.loadFontAsync(node.fontName);
-            childFontSize = node.fontSize;
-          }
-          for (var token in tokenData.fontSize) {
-            if (tokenData[token].hasOwnProperty("value")) {
-            }
-          }
-          break;
-        default:
-          figma.notify("Type is a non-text element");
-      }
-    });
-  } catch (error) {
-    figma.notify("⛔️ Error could not determine element type ");
-  }
-}
+/**WILL HANDLE INSPECTING ELEMENTS */
+// function InspectElements(nodes) {
+//   try {
+//     nodes.forEach(async (child) => {
+//       switch (child.type) {
+//         case "TEXT":
+//           figma.notify("Type is a text");
+//           const node: TextNode = child as TextNode;
+//           let childFontSize;
+//           if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
+//             await figma.loadFontAsync(node.fontName);
+//             childFontSize = node.fontSize;
+//           }
+//           for (var token in tokenData.fontSize) {
+//             if (tokenData[token].hasOwnProperty("value")) {
+//             }
+//           }
+//           break;
+//         default:
+//           figma.notify("Type is a non-text element");
+//       }
+//     });
+//   } catch (error) {
+//     figma.notify("⛔️ Error could not determine element type ");
+//   }
+// }
 
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
@@ -296,7 +297,7 @@ function SendMessage(Error: String) {
  * when replacing the tokens in wpds.tokens.json.
  */
 
-BuildTheme();
+// BuildTheme();
 // build theme
 function BuildTheme() {
   let collectedStyleDataLight = [];

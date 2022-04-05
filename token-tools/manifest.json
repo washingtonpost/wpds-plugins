@@ -1,10 +1,8 @@
 {
   "name": "Token Tools",
-  "id": "1044987008646864166",
+  "id": "1081595648646695920",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
-  "editorType": [
-    "figma"
-  ]
+  "editorType": ["figma"]
 }

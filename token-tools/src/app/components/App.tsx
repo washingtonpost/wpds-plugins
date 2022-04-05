@@ -95,6 +95,7 @@ export default function App() {
       <Section
         title="Border radius"
         tokens={tokenData.radii}
+        calculateValue
         command="set-border-radius"
         setInFigma={SetValueInFigma}
       >
@@ -103,20 +104,22 @@ export default function App() {
       <Divider css={{ margin: `${theme.space[100]} 0` }} />
       <Section
         title="Font size"
+        calculateValue
         tokens={tokenData.fontSize}
         command="set-font-size"
         setInFigma={SetValueInFigma}
       >
-        Selecting a border radius token will apply the value to all corners.
+        Selecting a font size token will apply the value to the text.
       </Section>
       <Divider css={{ margin: `${theme.space[100]} 0` }} />
       <Section
         title="Line Height"
+        calculateValue
         tokens={tokenData.lineHeight}
         command="set-line-height"
         setInFigma={SetDirectValue}
       >
-        Selecting a border radius token will apply the value to all corners.
+        Selecting a line-height token will apply the value based on the current font size (font-size * line-height token).
       </Section>
     </>
   );

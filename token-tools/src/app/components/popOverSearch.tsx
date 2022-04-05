@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react";
 import { styled, theme } from "../../stitches.config";
 import { Divider } from "./divider";
-
+import tokenData from "../../wpds.tokens.json";
 export default function popOverSearch(props) {
-  const { tokens, isActive, setActive, setInFigma, hideSearch, command } =
+  const { tokens, calculateValue, isActive, setActive, setInFigma, hideSearch, command } =
     props;
   const [Value, setValue] = useState("");
   const Input = useRef();
   const ScrollContainer = useRef();
 
+  const Span = styled("span", {
+    fontSize: 10,
+    color: "#AAAAAA"
+  })
   const Icon = styled("div", {
     width: 16,
     height: 30,
@@ -57,25 +61,78 @@ export default function popOverSearch(props) {
       color: theme.colors.primary,
     },
   });
-
+  function lookupValue(lookUpToken) {
+    const path = lookUpToken.split(".");
+    let value;
+    switch (path.length) {
+      case 1:
+        value = tokenData[path[0]].value;
+        break;
+      case 2:
+        value = tokenData[path[0]][path[1]].value;
+        break;
+      case 3:
+        value = tokenData[path[0]][path[1]][path[2]].value;
+        break;
+      default:
+        break;
+    }
+    return value;
+  }
   const GetOptions = () => {
     if (!tokens) return;
     let newOptions = [];
     for (var token in tokens) {
       if (tokens[token].hasOwnProperty("value")) {
         if (token.substring(0, Value.length).includes(Value)) {
-          newOptions.push(token);
+          let helperValue = tokens[token].value;
+          if (typeof helperValue.includes === 'function') {
+            if (helperValue.includes('{')) {
+              let _helperValue = helperValue.substring(1, helperValue.length - 1);
+              helperValue = lookupValue(_helperValue);
+              if (calculateValue) {
+                let baseSize = parseInt(tokenData['baseSize'].value.split("px")[0]);
+                helperValue = helperValue * baseSize;
+              }
+            }
+            newOptions.push({ name: token, value: helperValue });
+          } else {
+            if (typeof helperValue === 'number') {
+              newOptions.push({ name: token, value: helperValue });
+            } else {
+              newOptions.push({ name: token });
+            }
+
+          }
+
         }
       }
     }
-    newOptions.sort();
+    newOptions.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1
+      }
+      if (b.name > a.name) {
+        return -1
+      } else {
+        return 0
+      }
+    });
     if (newOptions.length > 0) {
       return (
         <>
           {newOptions.map((item, i) => {
             return (
-              <Option onClick={() => CloseAndSet(item)} key={i}>
-                {item}
+              <Option onClick={() => CloseAndSet(item.name)} key={i}>
+                {item.name}
+                {item.value &&
+                  <Span>
+                    /
+                    {item.value}
+                  </Span>
+                }
+
+
               </Option>
             );
           })}
