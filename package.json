@@ -1,0 +1,8 @@
+{
+  "name": "wpds-plugins",
+  "workspaces": [
+    "./zeplin-plugins",
+    "./token-tools"
+  ],
+  "scripts": {}
+}
