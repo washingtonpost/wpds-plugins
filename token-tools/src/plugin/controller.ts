@@ -1,6 +1,10 @@
 import tokenData from "../wpds.tokens.json";
 
-figma.showUI(__html__, { width: 365, height: 634 });
+//Initialize Plugin
+figma.showUI(__html__, { width: 380, height: 700 });
+
+//Display Project name
+GetProjectInfo();
 
 //Enables and disable map buttons
 figma.on("selectionchange", async () => {
@@ -11,33 +15,6 @@ figma.on("selectionchange", async () => {
     // InspectElements(nodes);
   }
 });
-
-/**WILL HANDLE INSPECTING ELEMENTS */
-// function InspectElements(nodes) {
-//   try {
-//     nodes.forEach(async (child) => {
-//       switch (child.type) {
-//         case "TEXT":
-//           figma.notify("Type is a text");
-//           const node: TextNode = child as TextNode;
-//           let childFontSize;
-//           if (node.fontSize != figma.mixed && node.fontName != figma.mixed) {
-//             await figma.loadFontAsync(node.fontName);
-//             childFontSize = node.fontSize;
-//           }
-//           for (var token in tokenData.fontSize) {
-//             if (tokenData[token].hasOwnProperty("value")) {
-//             }
-//           }
-//           break;
-//         default:
-//           figma.notify("Type is a non-text element");
-//       }
-//     });
-//   } catch (error) {
-//     figma.notify("⛔️ Error could not determine element type ");
-//   }
-// }
 
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
@@ -283,6 +260,14 @@ function SendError(Error: String) {
   figma.ui.postMessage(message);
 }
 
+function GetProjectInfo() {
+  var message = {
+    type: "ProjectInfo",
+    message: figma.currentPage.name,
+  };
+  figma.ui.postMessage(message);
+}
+
 function SendMessage(Error: String) {
   var message = {
     type: "Debug",
@@ -299,46 +284,46 @@ function SendMessage(Error: String) {
 
 // BuildTheme();
 // build theme
-function BuildTheme() {
-  let collectedStyleDataLight = [];
-  let collectedStyleDataDark = [];
-  var colorStyles = figma.getLocalPaintStyles();
-  if (colorStyles) {
-    colorStyles.forEach(function (color) {
-      let name = styleName(color.name);
-      let key = color.key;
-      if (name && key) {
-        if (themeName(color.name).includes("light")) {
-          collectedStyleDataLight.push({ [name]: `S:${key}` });
-        } else if (themeName(color.name).includes("dark")) {
-          collectedStyleDataDark.push({ [name]: `S:${key}` });
-        }
-      } else {
-        figma.notify("Error adding theme");
-        throw new Error("Error adding theme");
-      }
-    });
-    // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
-    // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
-  } else {
-    figma.notify("There are no color styles in the document");
-  }
-}
+// function BuildTheme() {
+//   let collectedStyleDataLight = [];
+//   let collectedStyleDataDark = [];
+//   var colorStyles = figma.getLocalPaintStyles();
+//   if (colorStyles) {
+//     colorStyles.forEach(function (color) {
+//       let name = styleName(color.name);
+//       let key = color.key;
+//       if (name && key) {
+//         if (themeName(color.name).includes("light")) {
+//           collectedStyleDataLight.push({ [name]: `S:${key}` });
+//         } else if (themeName(color.name).includes("dark")) {
+//           collectedStyleDataDark.push({ [name]: `S:${key}` });
+//         }
+//       } else {
+//         figma.notify("Error adding theme");
+//         throw new Error("Error adding theme");
+//       }
+//     });
+//     // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
+//     // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
+//   } else {
+//     figma.notify("There are no color styles in the document");
+//   }
+// }
 // For building out theme
-function themeName(name) {
-  if (name.includes("/")) {
-    var prefix = name.split("/");
-    return prefix[0];
-  } else {
-    figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
-  }
-}
-//for building out style name
-function styleName(name) {
-  if (name.includes("/")) {
-    var styleName_1 = name.split("/").slice(1).join(".");
-    return styleName_1;
-  } else {
-    figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
-  }
-}
+// function themeName(name) {
+//   if (name.includes("/")) {
+//     var prefix = name.split("/");
+//     return prefix[0];
+//   } else {
+//     figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
+//   }
+// }
+// //for building out style name
+// function styleName(name) {
+//   if (name.includes("/")) {
+//     var styleName_1 = name.split("/").slice(1).join(".");
+//     return styleName_1;
+//   } else {
+//     figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
+//   }
+// }

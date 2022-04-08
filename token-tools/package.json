@@ -9,7 +9,11 @@
 		"prettier:format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,json}' "
 	},
 	"dependencies": {
+		"@radix-ui/react-checkbox": "^0.1.5",
+		"@radix-ui/react-popover": "^0.1.6",
 		"@stitches/react": "^1.2.6",
+		"@washingtonpost/wpds-assets": "^1.6.0",
+		"@washingtonpost/wpds-ui-kit": "^0.6.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},

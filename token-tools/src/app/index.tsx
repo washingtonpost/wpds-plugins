@@ -1,5 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "./components/App";
+import ViewController from "./Views/View-Controller";
 
-ReactDOM.render(<App />, document.getElementById("react-page"));
+ReactDOM.render(<ViewController />, document.getElementById("react-page"));
