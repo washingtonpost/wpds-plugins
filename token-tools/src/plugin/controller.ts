@@ -126,7 +126,7 @@ function SetLineHeight(nodes, token) {
           node.fontName != figma.mixed
         ) {
           await figma.loadFontAsync(node.fontName);
-          node.lineHeight = { unit: "PIXELS", value: token * node.fontSize };
+          node.lineHeight = { unit: "PERCENT", value: token * 100 };
           SendMessage(`Font size Set to ${token}`);
         } else {
           figma.notify(
