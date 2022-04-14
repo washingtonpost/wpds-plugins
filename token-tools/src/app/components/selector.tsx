@@ -12,7 +12,6 @@ import Divider from "./divider";
 import CommandCenter, {
 	FindReference,
 	BaseSize,
-	LookUpToken,
 } from "../Commands/command-center";
 
 //Popover Root
