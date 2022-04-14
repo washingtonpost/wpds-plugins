@@ -14,10 +14,10 @@ export default function App() {
 					break;
 			}
 			if (type === "Debug") {
-				console.log(`Figma Says: ${message}`);
+				// console.log(`Figma Says: ${message}`);
 			}
 			if (type === "Error") {
-				console.log(`Figma Says: ${message}`);
+				// console.log(`Figma Says: ${message}`);
 			}
 		};
 	}, []);

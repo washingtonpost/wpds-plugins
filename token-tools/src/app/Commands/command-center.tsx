@@ -15,7 +15,6 @@ function CommandCenter(command, tokenName) {
 			break;
 		case "set-border-radius":
 			_token = LookUpToken("radii", tokenName);
-			console.log(_token);
 			parent.postMessage(
 				{
 					pluginMessage: {
@@ -60,7 +59,6 @@ export function LookUpToken(_tokenPath, _tokenName) {
 	if (typeof _value === "string") {
 		if (_value.substring(0, 1) == "{") {
 			_value = FindReference(_value.substring(1, _value.length - 1));
-			console.log("found:" + _value);
 		}
 		if (_value.includes("rem")) {
 			_value = _value.substring(0, _value.length - 3);

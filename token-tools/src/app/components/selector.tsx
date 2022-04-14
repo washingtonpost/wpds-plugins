@@ -199,7 +199,6 @@ export default function TokenSelector({
 		},
 	};
 	const tokenData = tokenPath == "none" ? data : Tokens[tokenPath];
-	console.log(tokenData);
 	const [isActive, setIsActive] = useState(false);
 	const [Selection, setSelection] = useState("");
 	const [Query, setQuery] = useState("");

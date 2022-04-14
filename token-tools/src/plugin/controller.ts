@@ -19,7 +19,6 @@ figma.on("selectionchange", async () => {
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
 	let nodes;
-	console.log(msg);
 	switch (msg.type) {
 		case "set-theme":
 			nodes = SelectNodes(true);
