@@ -3,11 +3,17 @@
  * the token tool plugin. It is used to search, select, and inform the users of
  * what is currently assigned for an element.
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { theme, styled } from "../../stitches.config";
 import { Search } from "@washingtonpost/wpds-assets";
+import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
 import Divider from "./divider";
+import CommandCenter, {
+  FindReference,
+  BaseSize,
+  LookUpToken,
+} from "../Commands/command-center";
 
 //Popover Root
 const Root = Popover.Root;
@@ -23,7 +29,20 @@ const PopoverTrigger = styled(Popover.Trigger, {
   padding: "0px",
   alignItems: "center",
   borderRadius: "2px",
-  borderColor: "#F0F0F0",
+
+  variants: {
+    state: {
+      Error: {
+        borderColor: "red",
+      },
+      Warning: {
+        borderColor: "orange",
+      },
+      Default: {
+        borderColor: "#F0F0F0",
+      },
+    },
+  },
 });
 
 //Current value of selection
@@ -42,8 +61,8 @@ const ButtonIcon = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "28px",
-  width: "30px",
+  height: "26px",
+  width: "28px",
   variants: {
     active: {
       true: {
@@ -149,6 +168,7 @@ const OptionContainer = styled("div", {
 //Option button to select a token
 const Option = styled("button", {
   borderStyle: "none",
+  zIndex: 100,
   width: "100%",
   fontSize: "12px",
   padding: "8px",
@@ -160,16 +180,50 @@ const Option = styled("button", {
   },
 });
 
-export default function TokenSelector({ tokenData }) {
-  // const [tokenOptions, setTokenOptions] = useState(tokenData);
+const Helper = styled("span", {
+  fontSize: "12px",
+  color: "#AAAAAA",
+});
+
+export default function TokenSelector({
+  tokenPath,
+  command,
+  state,
+  useSearch,
+}) {
+  const data = {
+    dark: {
+      value: "true",
+    },
+    light: {
+      value: "false",
+    },
+  };
+  const tokenData = tokenPath == "none" ? data : Tokens[tokenPath];
+  console.log(tokenData);
   const [isActive, setIsActive] = useState(false);
   const [Selection, setSelection] = useState("");
   const [Query, setQuery] = useState("");
-  const [ForceFocus, setForceFocus] = useState(false);
 
-  function HandleChange(e) {
-    setQuery(e.target.value);
-    setSelection(e.target.value);
+  useEffect(() => {
+    if (Selection) {
+      setIsActive(false);
+      CommandCenter(command, Selection);
+    }
+  }, [Selection]);
+
+  function ValueHelper(_tokenName) {
+    let _value = Tokens[tokenPath][`${_tokenName}`].value;
+    if (typeof _value === "string") {
+      if (_value.substring(0, 1) == "{") {
+        _value = FindReference(_value.substring(1, _value.length - 1));
+      }
+      if (_value.includes("rem")) {
+        _value = _value.substring(0, _value.length - 3);
+        _value = `${BaseSize * parseFloat(_value)}px`;
+      }
+    }
+    return ` / ${_value}`;
   }
 
   const GetOptions = () => {
@@ -184,10 +238,27 @@ export default function TokenSelector({ tokenData }) {
     }
 
     if (FilteredOptions.length > 0) {
+      FilteredOptions.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (b.name > a.name) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
       return (
         <OptionContainer>
           {FilteredOptions.map((option, i) => {
-            return <Option key={i}>{option.name}</Option>;
+            return (
+              <Option onClick={() => setSelection(option.name)} key={i}>
+                {option.name}
+                {tokenPath != "none" && (
+                  <Helper>{ValueHelper(option.name)}</Helper>
+                )}
+              </Option>
+            );
           })}
         </OptionContainer>
       );
@@ -198,14 +269,14 @@ export default function TokenSelector({ tokenData }) {
 
   return (
     <Root open={isActive} onOpenChange={() => setIsActive(!isActive)}>
-      <PopoverTrigger disabled={ForceFocus && isActive}>
+      <PopoverTrigger state={state}>
         <SelectionText>{Selection}</SelectionText>
         <ButtonIcon active={isActive}>
           <TriggerIcon isActive={isActive} />
         </ButtonIcon>
       </PopoverTrigger>
       <Content align="end" sideOffset={-2}>
-        <SearchContainer>
+        <SearchContainer css={{ display: useSearch ? "grid" : "none" }}>
           {/* @ts-ignore */}
           <Icon size="100">
             {/* @ts-ignore */}
@@ -213,17 +284,14 @@ export default function TokenSelector({ tokenData }) {
           </Icon>
           <SearchBox
             autoFocus
-            onFocus={() => setForceFocus(true)}
-            onBlur={() => setForceFocus(false)}
             className="search"
-            onChange={HandleChange}
+            onChange={(e) => setQuery(e.target.value)}
             value={Query}
             placeholder="Search"
             type="text"
           />
+          <Divider css={{ gridColumn: "span 2", margin: "4px 0" }} />
         </SearchContainer>
-        <Divider css={{ margin: "4px 0" }} />
-
         <GetOptions />
       </Content>
     </Root>

@@ -8,17 +8,16 @@ export default function Theme() {
   return (
     <Layout>
       <Header as="h2" css={{ gridColumn: "span 2" }}>
-        Theme
+        Border Radius
       </Header>
       <Paragraph>
-        Selecting dark or light will change all of the colors on the page to
-        correct context.
+        Selecting a border radius token will apply the value to all corners.
       </Paragraph>
       <Selector
+        useSearch
         state={"Default"}
-        useSearch={false}
-        tokenPath="none"
-        command={"set-theme"}
+        tokenPath={"radii"}
+        command={"set-border-radius"}
       />
     </Layout>
   );

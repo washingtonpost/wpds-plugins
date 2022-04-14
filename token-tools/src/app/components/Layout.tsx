@@ -12,7 +12,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Grid>{children}</Grid>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

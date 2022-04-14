@@ -8,17 +8,17 @@ export default function Theme() {
   return (
     <Layout>
       <Header as="h2" css={{ gridColumn: "span 2" }}>
-        Theme
+        Line Height
       </Header>
       <Paragraph>
-        Selecting dark or light will change all of the colors on the page to
-        correct context.
+        Selecting a line-height token will set the line-height as a equivalent
+        percentage that is relative to the font-size.
       </Paragraph>
       <Selector
+        useSearch
         state={"Default"}
-        useSearch={false}
-        tokenPath="none"
-        command={"set-theme"}
+        tokenPath={"lineHeight"}
+        command={"set-line-height"}
       />
     </Layout>
   );

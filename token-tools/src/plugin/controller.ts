@@ -19,7 +19,7 @@ figma.on("selectionchange", async () => {
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
   let nodes;
-
+  console.log(msg);
   switch (msg.type) {
     case "set-theme":
       nodes = SelectNodes(true);
@@ -91,7 +91,7 @@ function SetFontSize(nodes, token) {
     );
   }
 }
-//set font size
+//set Line height
 function SetLineHeight(nodes, token) {
   try {
     nodes.forEach(async (child) => {
@@ -103,7 +103,7 @@ function SetLineHeight(nodes, token) {
           node.fontName != figma.mixed
         ) {
           await figma.loadFontAsync(node.fontName);
-          node.lineHeight = { unit: "PIXELS", value: token * node.fontSize };
+          node.lineHeight = { unit: "PERCENT", value: token * 100 };
           SendMessage(`Font size Set to ${token}`);
         } else {
           figma.notify(

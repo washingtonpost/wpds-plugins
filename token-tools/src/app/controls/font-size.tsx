@@ -8,17 +8,17 @@ export default function Theme() {
   return (
     <Layout>
       <Header as="h2" css={{ gridColumn: "span 2" }}>
-        Theme
+        Font size
       </Header>
       <Paragraph>
-        Selecting dark or light will change all of the colors on the page to
-        correct context.
+        Selecting a font-size token will set the font-size in pixel of the
+        selected text element(s).
       </Paragraph>
       <Selector
+        useSearch
         state={"Default"}
-        useSearch={false}
-        tokenPath="none"
-        command={"set-theme"}
+        tokenPath={"fontSize"}
+        command={"set-font-size"}
       />
     </Layout>
   );
