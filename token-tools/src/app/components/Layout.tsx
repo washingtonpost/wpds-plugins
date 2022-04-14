@@ -1,7 +1,7 @@
 import React from "react";
 import { theme } from "@washingtonpost/wpds-ui-kit";
 import { styled } from "../../stitches.config";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 export default function Layout({ children }) {
 	const Grid = styled("div", {
 		display: "flex",
