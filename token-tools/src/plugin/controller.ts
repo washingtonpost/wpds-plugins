@@ -21,7 +21,7 @@ figma.ui.onmessage = async (msg) => {
 	let nodes;
 	switch (msg.type) {
 		case "set-theme":
-			nodes = SelectNodes(true);
+			nodes = SelectNodes(false);
 			ToggleTheme(nodes, msg.token);
 			break;
 		case "set-font-size":
