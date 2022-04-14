@@ -9,15 +9,10 @@ export default function App() {
 			const { type, message } = event.data.pluginMessage;
 			switch (type) {
 				case "Error":
+					return message;
 					break;
 				default:
 					break;
-			}
-			if (type === "Debug") {
-				// console.log(`Figma Says: ${message}`);
-			}
-			if (type === "Error") {
-				// console.log(`Figma Says: ${message}`);
 			}
 		};
 	}, []);

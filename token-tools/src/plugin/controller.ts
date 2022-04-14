@@ -56,7 +56,7 @@ function SelectNodes(EnablePageSelection: boolean) {
 	}
 	//if nothing please notify the user to make a selection
 	else {
-		figma.notify("🙏  Please make a selection");
+		Notify("🙏  Please make a selection");
 		return null; //Stop the plugin
 	}
 }
@@ -73,9 +73,8 @@ function SetFontSize(nodes, token) {
 				) {
 					await figma.loadFontAsync(node.fontName);
 					node.fontSize = token;
-					SendMessage(`Font size Set to ${token}`);
 				} else {
-					figma.notify(
+					Notify(
 						"⚠️ 1 or more element had mixed font styles and was not changed."
 					);
 					// const fonts = child.getRangeAllFontNames(0, node.characters.length);
@@ -88,7 +87,7 @@ function SetFontSize(nodes, token) {
 			}
 		});
 	} catch (error) {
-		figma.notify(
+		Notify(
 			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
 		);
 	}
@@ -106,7 +105,6 @@ function SetLineHeight(nodes, token) {
 				) {
 					await figma.loadFontAsync(node.fontName);
 					node.lineHeight = { unit: "PERCENT", value: token * 100 };
-					SendMessage(`Font size Set to ${token}`);
 				} else {
 					figma.notify(
 						"⚠️ One or more items have mixed font styles and was not set"
@@ -117,7 +115,7 @@ function SetLineHeight(nodes, token) {
 			}
 		});
 	} catch (error) {
-		figma.notify(
+		Notify(
 			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
 		);
 	}
@@ -132,7 +130,6 @@ function SetBorderRadius(nodes, token) {
 			if (node.cornerRadius !== figma.mixed) {
 				node.cornerRadius = token;
 				success = true;
-				SendMessage(`Border Set to ${token}`);
 			} else {
 				success = true;
 				figma.notify(
@@ -142,7 +139,7 @@ function SetBorderRadius(nodes, token) {
 		}
 	});
 	if (!success)
-		figma.notify("🙏 Please select a Rectangle or a Frame and tying again");
+		Notify("🙏 Please select a Rectangle or a Frame and tying again");
 }
 
 //Toggles the theme by cycling through the nodes
@@ -192,7 +189,7 @@ async function applyColor(node, mode) {
 				if (currentStyle) {
 					let currentStyleName = currentStyle.name; //get current style name
 					let tokenName = currentStyleName.split("/")[1]; //TODO set to capture last word in sequence
-					SendMessage(tokenName);
+
 					//if dark mode look in light colors if light look in dark
 					const _matchingStyles = mode
 						? tokenData["color"]["light"]
@@ -204,10 +201,8 @@ async function applyColor(node, mode) {
 					const _matchedStyle: BaseStyle =
 						await figma.importStyleByKeyAsync(_matchingStyleID);
 					if (_matchedStyle) {
-						SendMessage(_matchedStyle.id);
 						node.fillStyleId = _matchedStyle.id;
 					} else {
-						SendError(`No match found for ${_matchedStyle.id}`);
 					}
 				}
 			}
@@ -229,7 +224,7 @@ async function applyColor(node, mode) {
 				if (currentStyle) {
 					let currentStyleName = currentStyle.name; //get current style name
 					let tokenName = currentStyleName.split("/")[1]; //split name from dark/ or light/
-					SendMessage(tokenName);
+
 					//if dark mode look in light colors if light look in dark
 					const _matchingStyles = mode
 						? tokenData["color"]["light"]
@@ -242,10 +237,8 @@ async function applyColor(node, mode) {
 					const _matchedStyle: BaseStyle =
 						await figma.importStyleByKeyAsync(_matchingStyleID);
 					if (_matchedStyle) {
-						SendMessage(_matchedStyle.id);
 						node.strokeStyleId = _matchedStyle.id;
 					} else {
-						SendError(`No match found for ${_matchedStyle.id}`);
 					}
 				}
 			}
@@ -253,27 +246,14 @@ async function applyColor(node, mode) {
 	}
 }
 
-//@ts-ignore
-function SendError(Error: String) {
-	var message = {
-		type: "Error",
-		message: Error,
-	};
-	figma.ui.postMessage(message);
+function Notify(Message: String) {
+	figma.notify(`${Message}`);
 }
 
 function GetProjectInfo() {
 	var message = {
 		type: "ProjectInfo",
 		message: figma.currentPage.name,
-	};
-	figma.ui.postMessage(message);
-}
-
-function SendMessage(Error: String) {
-	var message = {
-		type: "Debug",
-		message: Error,
 	};
 	figma.ui.postMessage(message);
 }
