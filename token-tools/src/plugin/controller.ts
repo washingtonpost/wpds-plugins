@@ -289,7 +289,7 @@ function ExportLocalColorStyles() {
 }
 
 //Retrieve local Styles for reference
-ImportColorTokens();
+// ImportColorTokens();
 
 function ImportColorTokens() {
 	var TokenColors = Tokens["color"];
