@@ -49,7 +49,16 @@ function CommandCenter(command, tokenName) {
 				"*"
 			);
 			break;
+		case "create-color-tokens":
+			parent.postMessage(
+				{ pluginMessage: { type: "create-color-tokens" } },
+				"*"
+			);
 		default:
+			parent.postMessage(
+				{ pluginMessage: { type: "update-color-tokens" } },
+				"*"
+			);
 			break;
 	}
 }

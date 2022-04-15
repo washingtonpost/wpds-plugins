@@ -3,20 +3,12 @@ import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
 
-//Display Project name
-GetProjectInfo();
-
 //Enables and disable map buttons
 figma.on("selectionchange", async () => {
 	if (figma.currentPage.selection.length === 0) {
 		return;
 	} else {
-		let nodes = SelectNodes(false);
-		nodes.forEach((node: FrameNode) => {
-			if (node.fills) {
-				console.log(node.fills[0]);
-			}
-		});
+		// let nodes = SelectNodes(false);
 		// InspectElements(nodes);
 	}
 });
@@ -40,6 +32,16 @@ figma.ui.onmessage = async (msg) => {
 		case "set-border-radius":
 			nodes = SelectNodes(false);
 			SetBorderRadius(nodes, msg.token);
+			break;
+		case "update-color-tokens":
+			UpdateLocalStyles();
+			break;
+		case "create-color-tokens":
+			CreateColorTokens();
+			break;
+		case "export-local-color-tokens":
+			ExportLocalColorStyles();
+			break;
 		default:
 			break;
 	}
@@ -258,23 +260,32 @@ async function applyColor(node, mode) {
 	}
 }
 
+/**
+ * Uses native Figma toast messaging system to let the user know of important information or errors that have happen in the plugin.
+ * @param Message
+ * @param Error
+ */
 function Notify(Message: String, Error: boolean) {
 	//@ts-ignore
 	const Options: NotificationOptions = { error: Error };
 	figma.notify(`${Message}`, Options);
 }
 
-function GetProjectInfo() {
+/**
+ * Gets Project info returns the name of the current page.
+ */
+function GetPageName() {
 	var message = {
-		type: "ProjectInfo",
+		type: "PageName",
 		message: figma.currentPage.name,
 	};
 	figma.ui.postMessage(message);
 }
 
-//Retrieve local Styles for reference
-ExportLocalColorStyles();
-
+/**
+ * Exports local color styles and uids. To look up and sync across team files.
+ * @returns Array of JSON objects to be added as a file in the plugin.
+ */
 function ExportLocalColorStyles() {
 	let Formatted_LocalColorStyles = {};
 	var LocalColorStyles = figma.getLocalPaintStyles();
@@ -284,63 +295,138 @@ function ExportLocalColorStyles() {
 	}
 	LocalColorStyles.forEach((style) => {
 		if (!style.id) return;
-		Formatted_LocalColorStyles[style.id] = style;
+		Formatted_LocalColorStyles[style.id] = {
+			name: style.name,
+			description: style.description,
+		};
 	});
+	console.log(JSON.stringify(Formatted_LocalColorStyles));
 }
 
-//Retrieve local Styles for reference
-// ImportColorTokens();
+/** Updating local styles will sync with the WPDS json tokens and any current paintstyles
+ * that do not exist in token JSON will be added to SubjectForRemoval and sent to the user
+ * to confirm the removal.
+ */
 
-function ImportColorTokens() {
+function UpdateLocalStyles() {
+	var LocalColorStyles = figma.getLocalPaintStyles();
+	let SubjectForRemoval = [];
+	if (!LocalColorStyles) {
+		Notify("🚨 No local color styles found", true);
+		return;
+	}
+	LocalColorStyles.forEach((style) => {
+		if (!style.id) return;
+		const tokenPath = style.name.split("/");
+		const _token = Tokens.color[tokenPath[0]][tokenPath[1]];
+		if (_token) {
+			if (_token.hasOwnProperty("value")) {
+				const _rgb = GetRGB(_token.value);
+				const _alpha = GetAlpha(_token.value);
+				const _paint: SolidPaint = {
+					type: "SOLID",
+					blendMode: "NORMAL",
+					color: _rgb,
+					opacity: _alpha,
+				};
+				style.paints = [_paint];
+			}
+		} else {
+			SubjectForRemoval.push(style);
+		}
+	});
+	var message = {
+		type: "Confirm-Removal",
+		message: SubjectForRemoval,
+	};
+	figma.ui.postMessage(message);
+}
+
+/** CreateColorTokens will generate new paintstyles if they do not exist in Figma already. If
+ * they do exist it will simply update the color value of the RGBA.
+ */
+function CreateColorTokens() {
+	const localColorStyles = figma.getLocalPaintStyles();
 	var TokenColors = Tokens["color"];
 	if (!TokenColors) {
 		Notify("🚨 No Colors tokens found", true);
 		return;
 	}
 	for (var ColorGroup in TokenColors) {
-		for (var tokenName in TokenColors[ColorGroup]) {
-			const Token = TokenColors[ColorGroup][tokenName];
-			if (Token.hasOwnProperty("value")) {
-				let Value = Token.value;
-				if (Value.substring(0, 1).includes("{")) {
-					const reference = Value.substring(1, Value.length - 1);
-					Value = FindReference(reference);
-					console.log(Value);
-				}
+		if (ColorGroup != "theme") {
+			for (var tokenName in TokenColors[ColorGroup]) {
+				const Token = TokenColors[ColorGroup][tokenName];
+				if (Token.hasOwnProperty("value")) {
+					let Value = Token.value;
+					if (Value.substring(0, 1).includes("{")) {
+						const reference = Value.substring(1, Value.length - 1);
+						Value = FindReference(reference);
+					}
 
-				const RGB = GetRGB(Value);
-				const Paint: SolidPaint = {
-					type: "SOLID",
-					blendMode: "NORMAL",
-					color: RGB,
-					opacity: 1,
-				};
-				//@ts-ignore
-				const NewPaintStyle: PaintStyle = {
-					type: `PAINT`,
-					name: `${ColorGroup}/${tokenName}`,
-					paints: [Paint],
-					id: tokenName,
-					description: Token.description,
-					key: `${ColorGroup}/${tokenName}`,
-				};
-				const style = figma.createPaintStyle();
-				style.name = `${ColorGroup}/${tokenName}`;
-				style.paints = [Paint];
+					const RGB = GetRGB(Value);
+					const _alpha = GetAlpha(Value);
+					const Paint: SolidPaint = {
+						type: "SOLID",
+						blendMode: "NORMAL",
+						color: RGB,
+						opacity: _alpha,
+					};
+
+					//@ts-ignore
+					const NewPaintStyle: PaintStyle = {
+						type: `PAINT`,
+						name: `${ColorGroup}/${tokenName}`,
+						paints: [Paint],
+						id: tokenName,
+						description: Token.description,
+						key: `${ColorGroup}/${tokenName}`,
+					};
+					const localStyle = localColorStyles.find(
+						({ name: localName }) =>
+							localName === `${ColorGroup}/${tokenName}`
+					);
+					const style = localStyle || figma.createPaintStyle();
+					style.name = `${ColorGroup}/${tokenName}`;
+					style.paints = [Paint];
+
+					//check if matching Theme alias
+					for (var alias in Tokens.color.theme) {
+						console.log(Tokens.color.theme[alias]);
+						if (Tokens.color.theme[alias].hasOwnProperty("value")) {
+							const lookUpReference = Tokens.color.theme[
+								alias
+							].value.substring(1, Value.length - 1);
+							if (lookUpReference == tokenName) {
+								const _aliasValue =
+									FindReference(lookUpReference);
+								console.log(alias + _aliasValue);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 }
 
+/**
+ * Looks up reference based on alias and created the paint style based on that color of the current context.
+ * @param alias
+ * @returns
+ */
 function FindReference(alias) {
 	if (alias.includes("-static")) {
-		console.log(Tokens.color.static[alias].value);
-		return Tokens.color.static[alias].value;
+		return Tokens.color.static[alias.substring(0, alias.length - 7)].value;
 	} else {
-		console.log(Tokens.color.light[alias].value);
 		return Tokens.color.light[alias].value;
 	}
 }
+
+/**
+ * Takes in rgba string and returns the rgba values normalized value over 0 being black and 1 being white.
+ * @param rgba rgba(r,g,b,a):string
+ * @returns object with b,g,r values.
+ */
 function GetRGB(rgba) {
 	if (rgba.substring(0, 4).includes("rgba")) {
 		const formatString = rgba
@@ -353,5 +439,21 @@ function GetRGB(rgba) {
 			g: parseFloat(Values[1]) / 255,
 			r: parseFloat(Values[0]) / 255,
 		};
+	}
+}
+
+/**
+ * Takes in rgba string and returns the alpha value.
+ * @param rgba rgba(r,g,b,a):string
+ * @returns alpha value float
+ */
+function GetAlpha(rgba) {
+	if (rgba.substring(0, 4).includes("rgba")) {
+		const formatString = rgba
+			.substring(0, rgba.length - 1)
+			.split("rgba(")[1];
+		const Values = formatString.split(",");
+
+		return parseFloat(Values[3]);
 	}
 }
