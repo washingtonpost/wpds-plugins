@@ -1,4 +1,4 @@
-import tokenData from "../wpds.tokens.json";
+import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
 
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
@@ -11,7 +11,12 @@ figma.on("selectionchange", async () => {
 	if (figma.currentPage.selection.length === 0) {
 		return;
 	} else {
-		// let nodes = SelectNodes(false);
+		let nodes = SelectNodes(false);
+		nodes.forEach((node: FrameNode) => {
+			if (node.fills) {
+				console.log(node.fills[0]);
+			}
+		});
 		// InspectElements(nodes);
 	}
 });
@@ -56,7 +61,7 @@ function SelectNodes(EnablePageSelection: boolean) {
 	}
 	//if nothing please notify the user to make a selection
 	else {
-		Notify("🙏  Please make a selection");
+		Notify("🙏  Please make a selection", false);
 		return null; //Stop the plugin
 	}
 }
@@ -75,7 +80,8 @@ function SetFontSize(nodes, token) {
 					node.fontSize = token;
 				} else {
 					Notify(
-						"⚠️ 1 or more element had mixed font styles and was not changed."
+						"⚠️ 1 or more element had mixed font styles and was not changed.",
+						false
 					);
 					// const fonts = child.getRangeAllFontNames(0, node.characters.length);
 					// for (const font of fonts) {
@@ -88,7 +94,8 @@ function SetFontSize(nodes, token) {
 		});
 	} catch (error) {
 		Notify(
-			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
+			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again ",
+			true
 		);
 	}
 }
@@ -106,8 +113,9 @@ function SetLineHeight(nodes, token) {
 					await figma.loadFontAsync(node.fontName);
 					node.lineHeight = { unit: "PERCENT", value: token * 100 };
 				} else {
-					figma.notify(
-						"⚠️ One or more items have mixed font styles and was not set"
+					Notify(
+						"⚠️ One or more items have mixed font styles and was not set",
+						false
 					);
 				}
 			} else {
@@ -116,7 +124,8 @@ function SetLineHeight(nodes, token) {
 		});
 	} catch (error) {
 		Notify(
-			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again "
+			"⛔️ Error occured 1 or more items is not a Text item. Please Try Again ",
+			true
 		);
 	}
 }
@@ -139,7 +148,10 @@ function SetBorderRadius(nodes, token) {
 		}
 	});
 	if (!success)
-		Notify("🙏 Please select a Rectangle or a Frame and tying again");
+		Notify(
+			"🙏 Please select a Rectangle or a Frame and tying again",
+			false
+		);
 }
 
 //Toggles the theme by cycling through the nodes
@@ -192,8 +204,8 @@ async function applyColor(node, mode) {
 
 					//if dark mode look in light colors if light look in dark
 					const _matchingStyles = mode
-						? tokenData["color"]["light"]
-						: tokenData["color"]["dark"];
+						? Tokens["color"]["light"]
+						: Tokens["color"]["dark"];
 
 					//Look for matching style based on matching style id
 					const _matchingStyleID =
@@ -227,8 +239,8 @@ async function applyColor(node, mode) {
 
 					//if dark mode look in light colors if light look in dark
 					const _matchingStyles = mode
-						? tokenData["color"]["light"]
-						: tokenData["color"]["dark"];
+						? Tokens["color"]["light"]
+						: Tokens["color"]["dark"];
 
 					//Look for matching style based on matching style id
 					let _matchingStyleID =
@@ -246,8 +258,10 @@ async function applyColor(node, mode) {
 	}
 }
 
-function Notify(Message: String) {
-	figma.notify(`${Message}`);
+function Notify(Message: String, Error: boolean) {
+	//@ts-ignore
+	const Options: NotificationOptions = { error: Error };
+	figma.notify(`${Message}`, Options);
 }
 
 function GetProjectInfo() {
@@ -258,54 +272,86 @@ function GetProjectInfo() {
 	figma.ui.postMessage(message);
 }
 
-/**
- * Below will console log the local color IDs needed to be added to wpds.tokens.json.
- * Figma requires you hard code the color ids. The format of color IDs use S:[uid] this is needed
- * when replacing the tokens in wpds.tokens.json.
- */
+//Retrieve local Styles for reference
+ExportLocalColorStyles();
 
-// BuildTheme();
-// build theme
-// function BuildTheme() {
-//   let collectedStyleDataLight = [];
-//   let collectedStyleDataDark = [];
-//   var colorStyles = figma.getLocalPaintStyles();
-//   if (colorStyles) {
-//     colorStyles.forEach(function (color) {
-//       let name = styleName(color.name);
-//       let key = color.key;
-//       if (name && key) {
-//         if (themeName(color.name).includes("light")) {
-//           collectedStyleDataLight.push({ [name]: `S:${key}` });
-//         } else if (themeName(color.name).includes("dark")) {
-//           collectedStyleDataDark.push({ [name]: `S:${key}` });
-//         }
-//       } else {
-//         figma.notify("Error adding theme");
-//         throw new Error("Error adding theme");
-//       }
-//     });
-//     // SendMessage("Light Color Ids:" + JSON.stringify(collectedStyleDataLight));
-//     // SendMessage("Dark Color Ids:" + JSON.stringify(collectedStyleDataDark));
-//   } else {
-//     figma.notify("There are no color styles in the document");
-//   }
-// }
-// For building out theme
-// function themeName(name) {
-//   if (name.includes("/")) {
-//     var prefix = name.split("/");
-//     return prefix[0];
-//   } else {
-//     figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
-//   }
-// }
-// //for building out style name
-// function styleName(name) {
-//   if (name.includes("/")) {
-//     var styleName_1 = name.split("/").slice(1).join(".");
-//     return styleName_1;
-//   } else {
-//     figma.notify("Styles names must be prefixed. Ex: themeName/colorName");
-//   }
-// }
+function ExportLocalColorStyles() {
+	let Formatted_LocalColorStyles = {};
+	var LocalColorStyles = figma.getLocalPaintStyles();
+	if (!LocalColorStyles) {
+		Notify("🚨 No local color styles found", true);
+		return;
+	}
+	LocalColorStyles.forEach((style) => {
+		if (!style.id) return;
+		Formatted_LocalColorStyles[style.id] = style;
+	});
+}
+
+//Retrieve local Styles for reference
+ImportColorTokens();
+
+function ImportColorTokens() {
+	var TokenColors = Tokens["color"];
+	if (!TokenColors) {
+		Notify("🚨 No Colors tokens found", true);
+		return;
+	}
+	for (var ColorGroup in TokenColors) {
+		for (var tokenName in TokenColors[ColorGroup]) {
+			const Token = TokenColors[ColorGroup][tokenName];
+			if (Token.hasOwnProperty("value")) {
+				let Value = Token.value;
+				if (Value.substring(0, 1).includes("{")) {
+					const reference = Value.substring(1, Value.length - 1);
+					Value = FindReference(reference);
+					console.log(Value);
+				}
+
+				const RGB = GetRGB(Value);
+				const Paint: SolidPaint = {
+					type: "SOLID",
+					blendMode: "NORMAL",
+					color: RGB,
+					opacity: 1,
+				};
+				//@ts-ignore
+				const NewPaintStyle: PaintStyle = {
+					type: `PAINT`,
+					name: `${ColorGroup}/${tokenName}`,
+					paints: [Paint],
+					id: tokenName,
+					description: Token.description,
+					key: `${ColorGroup}/${tokenName}`,
+				};
+				const style = figma.createPaintStyle();
+				style.name = `${ColorGroup}/${tokenName}`;
+				style.paints = [Paint];
+			}
+		}
+	}
+}
+
+function FindReference(alias) {
+	if (alias.includes("-static")) {
+		console.log(Tokens.color.static[alias].value);
+		return Tokens.color.static[alias].value;
+	} else {
+		console.log(Tokens.color.light[alias].value);
+		return Tokens.color.light[alias].value;
+	}
+}
+function GetRGB(rgba) {
+	if (rgba.substring(0, 4).includes("rgba")) {
+		const formatString = rgba
+			.substring(0, rgba.length - 1)
+			.split("rgba(")[1];
+		const Values = formatString.split(",");
+
+		return {
+			b: parseFloat(Values[2]) / 255,
+			g: parseFloat(Values[1]) / 255,
+			r: parseFloat(Values[0]) / 255,
+		};
+	}
+}
