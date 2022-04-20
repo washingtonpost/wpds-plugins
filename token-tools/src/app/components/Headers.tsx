@@ -6,14 +6,20 @@ const Header = styled("h1", {
 	marginBottom: 0,
 	paddingBottom: 0,
 	fontSize: theme.sizes[125],
-	fontWeight: theme.fontWeights.bold,
+
 	variants: {
 		as: {
 			h2: {
 				fontSize: theme.sizes["087"],
+				fontWeight: theme.fontWeights.bold,
 			},
 			h3: {
-				fontSize: theme.sizes["050"],
+				fontSize: theme.sizes["075"],
+				fontWeight: theme.fontWeights.bold,
+			},
+			h4: {
+				fontSize: theme.sizes["087"],
+				fontWeight: "normal",
 			},
 		},
 	},

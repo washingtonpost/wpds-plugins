@@ -1,7 +1,10 @@
 import React from "react";
 import { styled } from "../../stitches.config";
-
-export default function Footer() {
+import Settings from "@washingtonpost/wpds-assets/asset/settings";
+import { Icon } from "@washingtonpost/wpds-ui-kit";
+import Header from "./Headers";
+Icon;
+export default function Footer({ setCurrentView }) {
 	const Footer = styled("footer", {
 		position: "absolute",
 		bottom: 0,
@@ -18,13 +21,41 @@ export default function Footer() {
 	});
 	const RightCell = styled("div", {
 		justifySelf: "flex-end",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "end",
 		width: "100%",
 		padding: "0px 16px",
+	});
+	const Button = styled("button", {
+		backgroundColor: "transparent",
+		borderStyle: "none",
+		display: "flex",
+		gap: "8px",
+		borderRadius: "4px",
+		alignItems: "center",
+		justifyContent: "center",
+		padding: "8px",
+		transition: "background-color .25s",
+		"&:hover": {
+			backgroundColor: "$subtle",
+		},
 	});
 	return (
 		<Footer>
 			<LeftCell>Left</LeftCell>
-			<RightCell>Right</RightCell>
+			<RightCell>
+				<Button onClick={() => setCurrentView("settings")}>
+					{/* @ts-ignore */}
+					<Icon size="100" label="settings">
+						{/* @ts-ignore */}
+						<Settings />
+					</Icon>
+					<Header css={{ padding: 0, margin: 0 }} as={"h4"}>
+						Settings
+					</Header>
+				</Button>
+			</RightCell>
 		</Footer>
 	);
 }

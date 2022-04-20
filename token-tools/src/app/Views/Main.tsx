@@ -10,6 +10,7 @@ import FontSizeControl from "../controls/font-size";
 import LineHeightControl from "../controls/line-height";
 
 import Divider from "../components/divider";
+import { StyledLink } from "../components/link";
 export default function Main() {
 	const [HelpShown, setHelpShown] = useState(false);
 	const IconButton = styled(Popover.Trigger, {
@@ -66,7 +67,14 @@ export default function Main() {
 						Select 1 or more elements on the figma canvas to edit
 						the token property. Please keep in mind the more
 						elements that are selected the longer it will take to
-						apply the token.
+						apply the token. For more information please{" "}
+						<StyledLink
+							target="_blank"
+							href="https://build.washingtonpost.com/resources/guides/figma-guide#Using%20our%20tokens"
+						>
+							read our guide
+						</StyledLink>
+						.
 					</Paragraph>
 				</Content>
 			</Popover.Root>

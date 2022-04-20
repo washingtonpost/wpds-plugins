@@ -1,5 +1,4 @@
 import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
-
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
 
@@ -274,6 +273,7 @@ function Notify(Message: String, Error: boolean) {
 /**
  * Gets Project info returns the name of the current page.
  */
+// @ts-ignore
 function GetPageName() {
 	var message = {
 		type: "PageName",
@@ -318,7 +318,7 @@ function UpdateLocalStyles() {
 	LocalColorStyles.forEach((style) => {
 		if (!style.id) return;
 		const tokenPath = style.name.split("/");
-		const _token = Tokens.color[tokenPath[0]][tokenPath[1]];
+		let _token = Tokens.color[tokenPath[0]][tokenPath[1]];
 		if (_token) {
 			if (_token.hasOwnProperty("value")) {
 				const _rgb = GetRGB(_token.value);
@@ -331,10 +331,32 @@ function UpdateLocalStyles() {
 				};
 				style.paints = [_paint];
 			}
+		} else if (Tokens.color.theme[tokenPath[1]]) {
+			const alias = tokenPath[1];
+			let reference = Tokens.color.theme[tokenPath[1]].value;
+			reference = reference.substring(1, reference.length - 1);
+			const lookUpValue = FindReference(reference);
+
+			const RGB = GetRGB(lookUpValue);
+			const _alpha = GetAlpha(lookUpValue);
+			const Paint: SolidPaint = {
+				type: "SOLID",
+				blendMode: "NORMAL",
+				color: RGB,
+				opacity: _alpha,
+			};
+			const localStyle = LocalColorStyles.find(
+				({ name: localName }) =>
+					localName === `${tokenPath[0]}/${alias}`
+			);
+			localStyle.paints = [Paint];
+		} else if (tokenPath[1].includes("-static")) {
 		} else {
 			SubjectForRemoval.push(style);
 		}
 	});
+	console.log(SubjectForRemoval);
+
 	var message = {
 		type: "Confirm-Removal",
 		message: SubjectForRemoval,
@@ -372,34 +394,53 @@ function CreateColorTokens() {
 						opacity: _alpha,
 					};
 
-					//@ts-ignore
-					const NewPaintStyle: PaintStyle = {
-						type: `PAINT`,
-						name: `${ColorGroup}/${tokenName}`,
-						paints: [Paint],
-						id: tokenName,
-						description: Token.description,
-						key: `${ColorGroup}/${tokenName}`,
-					};
 					const localStyle = localColorStyles.find(
 						({ name: localName }) =>
-							localName === `${ColorGroup}/${tokenName}`
+							localName ===
+							`${ColorGroup}/${tokenName}${
+								ColorGroup == "static" ? "-static" : ""
+							}`
 					);
 					const style = localStyle || figma.createPaintStyle();
-					style.name = `${ColorGroup}/${tokenName}`;
+					style.name = `${ColorGroup}/${tokenName}${
+						ColorGroup == "static" ? "-static" : ""
+					}`;
 					style.paints = [Paint];
 
 					//check if matching Theme alias
-					for (var alias in Tokens.color.theme) {
-						console.log(Tokens.color.theme[alias]);
-						if (Tokens.color.theme[alias].hasOwnProperty("value")) {
-							const lookUpReference = Tokens.color.theme[
-								alias
-							].value.substring(1, Value.length - 1);
-							if (lookUpReference == tokenName) {
-								const _aliasValue =
-									FindReference(lookUpReference);
-								console.log(alias + _aliasValue);
+					if (ColorGroup != "static") {
+						for (var alias in Tokens.color.theme) {
+							if (
+								Tokens.color.theme[alias].hasOwnProperty(
+									"value"
+								)
+							) {
+								let lookUpReference =
+									Tokens.color.theme[alias].value;
+								lookUpReference = lookUpReference.substring(
+									1,
+									lookUpReference.length - 1
+								);
+
+								if (lookUpReference == tokenName) {
+									const RGB = GetRGB(Value);
+									const _alpha = GetAlpha(Value);
+									const Paint: SolidPaint = {
+										type: "SOLID",
+										blendMode: "NORMAL",
+										color: RGB,
+										opacity: _alpha,
+									};
+									const localStyle = localColorStyles.find(
+										({ name: localName }) =>
+											localName ===
+											`${ColorGroup}/${alias}`
+									);
+									const style =
+										localStyle || figma.createPaintStyle();
+									style.name = `${ColorGroup}/${alias}`;
+									style.paints = [Paint];
+								}
 							}
 						}
 					}
