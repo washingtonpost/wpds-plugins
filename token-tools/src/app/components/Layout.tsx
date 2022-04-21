@@ -2,7 +2,7 @@ import React from "react";
 import { theme } from "@washingtonpost/wpds-ui-kit";
 import { styled } from "../../stitches.config";
 import Footer from "./Footer";
-export default function Layout({ children, setCurrentView }) {
+export default function Layout({ children, setCurrentView, currentView }) {
 	const Grid = styled("div", {
 		display: "flex",
 		flexDirection: "column",
@@ -12,7 +12,7 @@ export default function Layout({ children, setCurrentView }) {
 	return (
 		<>
 			<Grid>{children}</Grid>
-			<Footer setCurrentView={setCurrentView} />
+			<Footer currentView={currentView} setCurrentView={setCurrentView} />
 		</>
 	);
 }

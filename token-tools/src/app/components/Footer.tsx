@@ -1,10 +1,11 @@
 import React from "react";
 import { styled } from "../../stitches.config";
 import Settings from "@washingtonpost/wpds-assets/asset/settings";
+import ArrowLeft from "@washingtonpost/wpds-assets/asset/arrow-left";
 import { Icon } from "@washingtonpost/wpds-ui-kit";
 import Header from "./Headers";
 Icon;
-export default function Footer({ setCurrentView }) {
+export default function Footer({ setCurrentView, currentView }) {
 	const Footer = styled("footer", {
 		position: "absolute",
 		bottom: 0,
@@ -16,6 +17,9 @@ export default function Footer({ setCurrentView }) {
 		boxShadow: "0px -2px 14px 0px rgba(0,0,0,0.15)",
 	});
 	const LeftCell = styled("div", {
+		justifySelf: "flex-end",
+		display: "flex",
+		alignItems: "center",
 		width: "100%",
 		padding: "0px 16px",
 	});
@@ -43,19 +47,32 @@ export default function Footer({ setCurrentView }) {
 	});
 	return (
 		<Footer>
-			<LeftCell>Left</LeftCell>
-			<RightCell>
-				<Button onClick={() => setCurrentView("settings")}>
-					{/* @ts-ignore */}
-					<Icon size="100" label="settings">
+			<LeftCell>
+				{currentView != "settings" ? (
+					<Button onClick={() => setCurrentView("settings")}>
 						{/* @ts-ignore */}
-						<Settings />
-					</Icon>
-					<Header css={{ padding: 0, margin: 0 }} as={"h4"}>
-						Settings
-					</Header>
-				</Button>
-			</RightCell>
+						<Icon size="100" label="settings">
+							{/* @ts-ignore */}
+							<Settings />
+						</Icon>
+						<Header css={{ padding: 0, margin: 0 }} as={"h4"}>
+							Settings
+						</Header>
+					</Button>
+				) : (
+					<Button onClick={() => setCurrentView("main")}>
+						{/* @ts-ignore */}
+						<Icon size="100" label="settings">
+							{/* @ts-ignore */}
+							<ArrowLeft />
+						</Icon>
+						<Header css={{ padding: 0, margin: 0 }} as={"h4"}>
+							Back
+						</Header>
+					</Button>
+				)}
+			</LeftCell>
+			<RightCell></RightCell>
 		</Footer>
 	);
 }

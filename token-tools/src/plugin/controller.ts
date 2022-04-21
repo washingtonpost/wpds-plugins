@@ -374,72 +374,79 @@ function CreateColorTokens() {
 		Notify("🚨 No Colors tokens found", true);
 		return;
 	}
-	for (var ColorGroup in TokenColors) {
-		if (ColorGroup != "theme") {
-			for (var tokenName in TokenColors[ColorGroup]) {
-				const Token = TokenColors[ColorGroup][tokenName];
-				if (Token.hasOwnProperty("value")) {
-					let Value = Token.value;
-					if (Value.substring(0, 1).includes("{")) {
-						const reference = Value.substring(1, Value.length - 1);
-						Value = FindReference(reference);
-					}
+	try {
+		for (var ColorGroup in TokenColors) {
+			if (ColorGroup != "theme") {
+				for (var tokenName in TokenColors[ColorGroup]) {
+					const Token = TokenColors[ColorGroup][tokenName];
+					if (Token.hasOwnProperty("value")) {
+						let Value = Token.value;
+						if (Value.substring(0, 1).includes("{")) {
+							const reference = Value.substring(
+								1,
+								Value.length - 1
+							);
+							Value = FindReference(reference);
+						}
 
-					const RGB = GetRGB(Value);
-					const _alpha = GetAlpha(Value);
-					const Paint: SolidPaint = {
-						type: "SOLID",
-						blendMode: "NORMAL",
-						color: RGB,
-						opacity: _alpha,
-					};
+						const RGB = GetRGB(Value);
+						const _alpha = GetAlpha(Value);
+						const Paint: SolidPaint = {
+							type: "SOLID",
+							blendMode: "NORMAL",
+							color: RGB,
+							opacity: _alpha,
+						};
 
-					const localStyle = localColorStyles.find(
-						({ name: localName }) =>
-							localName ===
-							`${ColorGroup}/${tokenName}${
-								ColorGroup == "static" ? "-static" : ""
-							}`
-					);
-					const style = localStyle || figma.createPaintStyle();
-					style.name = `${ColorGroup}/${tokenName}${
-						ColorGroup == "static" ? "-static" : ""
-					}`;
-					style.paints = [Paint];
+						const localStyle = localColorStyles.find(
+							({ name: localName }) =>
+								localName ===
+								`${ColorGroup}/${tokenName}${
+									ColorGroup == "static" ? "-static" : ""
+								}`
+						);
+						const style = localStyle || figma.createPaintStyle();
+						style.name = `${ColorGroup}/${tokenName}${
+							ColorGroup == "static" ? "-static" : ""
+						}`;
+						style.paints = [Paint];
 
-					//check if matching Theme alias
-					if (ColorGroup != "static") {
-						for (var alias in Tokens.color.theme) {
-							if (
-								Tokens.color.theme[alias].hasOwnProperty(
-									"value"
-								)
-							) {
-								let lookUpReference =
-									Tokens.color.theme[alias].value;
-								lookUpReference = lookUpReference.substring(
-									1,
-									lookUpReference.length - 1
-								);
-
-								if (lookUpReference == tokenName) {
-									const RGB = GetRGB(Value);
-									const _alpha = GetAlpha(Value);
-									const Paint: SolidPaint = {
-										type: "SOLID",
-										blendMode: "NORMAL",
-										color: RGB,
-										opacity: _alpha,
-									};
-									const localStyle = localColorStyles.find(
-										({ name: localName }) =>
-											localName ===
-											`${ColorGroup}/${alias}`
+						//check if matching Theme alias
+						if (ColorGroup != "static") {
+							for (var alias in Tokens.color.theme) {
+								if (
+									Tokens.color.theme[alias].hasOwnProperty(
+										"value"
+									)
+								) {
+									let lookUpReference =
+										Tokens.color.theme[alias].value;
+									lookUpReference = lookUpReference.substring(
+										1,
+										lookUpReference.length - 1
 									);
-									const style =
-										localStyle || figma.createPaintStyle();
-									style.name = `${ColorGroup}/${alias}`;
-									style.paints = [Paint];
+
+									if (lookUpReference == tokenName) {
+										const RGB = GetRGB(Value);
+										const _alpha = GetAlpha(Value);
+										const Paint: SolidPaint = {
+											type: "SOLID",
+											blendMode: "NORMAL",
+											color: RGB,
+											opacity: _alpha,
+										};
+										const localStyle =
+											localColorStyles.find(
+												({ name: localName }) =>
+													localName ===
+													`${ColorGroup}/${alias}`
+											);
+										const style =
+											localStyle ||
+											figma.createPaintStyle();
+										style.name = `${ColorGroup}/${alias}`;
+										style.paints = [Paint];
+									}
 								}
 							}
 						}
@@ -447,6 +454,12 @@ function CreateColorTokens() {
 				}
 			}
 		}
+		Notify(
+			"🎨 Color styles have been generated. Please review your styles in figma",
+			false
+		);
+	} catch (error) {
+		Notify("🚨 Something went wrong.", true);
 	}
 }
 

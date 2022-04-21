@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { styled } from "../../stitches.config";
+import CommandCenter from "../Commands/command-center";
 import { Button } from "../components/button";
 import Header from "../components/Headers";
 import { StyledLink } from "../components/link";
 import Paragraph from "../components/paragraph";
 import Layout from "./layout";
-import CommandCenter from "../Commands/command-center";
 
 export default function UpdateLocalStyles() {
 	const [ConfirmAction, setConfirmAction] = useState(false);
@@ -14,25 +14,26 @@ export default function UpdateLocalStyles() {
 		gridTemplateColumns: "1fr 1fr",
 		gridGap: "8px",
 	});
+
 	function HandleConfirm() {
-		CommandCenter("update-color-tokens", null);
+		CommandCenter("create-color-tokens", null);
 		setConfirmAction(false);
 	}
 	return (
 		<Layout>
 			<Header as="h2" css={{ gridColumn: "span 2" }}>
-				Sync local color styles
+				Generate WPDS color tokens
 			</Header>
 			<Paragraph>
-				Syncing will be update or create to match the color styles found
-				in the{" "}
+				By selecting generate tokens all of the tokens found in{" "}
 				<StyledLink
 					target="_blank"
 					href="https://build.washingtonpost.com/foundations/color"
 				>
 					WPDS color tokens
 				</StyledLink>
-				. It will not delete any color styles.
+				{` `} will be generated as a color style. Use update token if
+				you do not want create all tokens.
 			</Paragraph>
 			{ConfirmAction ? (
 				<ChoiceContainer>
@@ -55,7 +56,7 @@ export default function UpdateLocalStyles() {
 					variant={"default"}
 					onClick={() => setConfirmAction(!ConfirmAction)}
 				>
-					Sync color styles
+					Generate Tokens
 				</Button>
 			)}
 		</Layout>
