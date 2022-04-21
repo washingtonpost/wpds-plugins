@@ -6,6 +6,7 @@ export default function Layout({ children, setCurrentView, currentView }) {
 	const Grid = styled("div", {
 		display: "flex",
 		flexDirection: "column",
+		overflow: "hidden",
 		padding: theme.space["025"],
 	});
 

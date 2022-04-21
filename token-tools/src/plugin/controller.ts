@@ -1,4 +1,5 @@
 import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
+import StyledIDs from "../localPaintStyleIDs.json";
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
 
@@ -158,19 +159,17 @@ function SetBorderRadius(nodes, token) {
 //Toggles the theme by cycling through the nodes
 function ToggleTheme(nodes, mode: boolean) {
 	nodes.forEach((node) => {
-		applyColor(node, mode);
+		switchTheme(node, mode);
 	});
 }
 
-//Applies color according to the type
-async function applyColor(node, mode) {
+async function switchTheme(node, mode) {
 	//iterate through children if the node has them
 	if (node.children) {
 		node.children.forEach((child) => {
-			applyColor(child, mode);
+			switchTheme(child, mode);
 		});
 	}
-
 	//check to see if fillstyle or strokestyle can be applied
 	if (
 		node.type === "COMPONENT" ||
@@ -186,79 +185,51 @@ async function applyColor(node, mode) {
 		"VECTOR" ||
 		"INSTANCE"
 	) {
-		if (node.fillStyleId) {
-			let style = node.fillStyleId.split(":")[1];
-			let styleID;
-			if (style.includes(",")) {
-				let styleSub = style.split(",")[0];
-				styleID = styleSub;
-			} else {
-				styleID = style;
-			}
-
-			if (styleID) {
-				const currentStyle: BaseStyle =
-					await figma.importStyleByKeyAsync(styleID); //fetch current style
-				if (currentStyle) {
-					let currentStyleName = currentStyle.name; //get current style name
-					let tokenName = currentStyleName.split("/")[1]; //TODO set to capture last word in sequence
-
-					//if dark mode look in light colors if light look in dark
-					const _matchingStyles = mode
-						? Tokens["color"]["light"]
-						: Tokens["color"]["dark"];
-
-					//Look for matching style based on matching style id
-					const _matchingStyleID =
-						_matchingStyles[tokenName].split(":")[1];
-					const _matchedStyle: BaseStyle =
-						await figma.importStyleByKeyAsync(_matchingStyleID);
-					if (_matchedStyle) {
-						node.fillStyleId = _matchedStyle.id;
-					} else {
+		try {
+			//Handles fills and looks up matching id for mode
+			if (node.fillStyleId) {
+				let style = node.fillStyleId.split(":")[1];
+				let _styledID = `${style.split(",")[0]}`;
+				let currentName = StyledIDs[_styledID].name;
+				console.log(currentName);
+				let context = `${mode}/${currentName.split("/")[1]}`;
+				if (context) {
+					for (let _id in StyledIDs) {
+						if (StyledIDs[_id].name == context) {
+							const currentStyle: BaseStyle =
+								await figma.importStyleByKeyAsync(_id); //fetch current style
+							node.fillStyleId = currentStyle.id;
+							break;
+						}
 					}
 				}
 			}
-		}
-		if (node.strokeStyleId) {
-			let style = node.strokeStyleId.split(":")[1];
-			let styleID;
-			if (style.includes(",")) {
-				let styleSub = style.split(",")[0];
-				styleID = styleSub;
-			} else {
-				styleID = style;
-			}
-
-			if (styleID) {
-				const currentStyle: BaseStyle =
-					await figma.importStyleByKeyAsync(styleID);
-				//fetch current style
-				if (currentStyle) {
-					let currentStyleName = currentStyle.name; //get current style name
-					let tokenName = currentStyleName.split("/")[1]; //split name from dark/ or light/
-
-					//if dark mode look in light colors if light look in dark
-					const _matchingStyles = mode
-						? Tokens["color"]["light"]
-						: Tokens["color"]["dark"];
-
-					//Look for matching style based on matching style id
-					let _matchingStyleID =
-						_matchingStyles[tokenName].split(":")[1];
-
-					const _matchedStyle: BaseStyle =
-						await figma.importStyleByKeyAsync(_matchingStyleID);
-					if (_matchedStyle) {
-						node.strokeStyleId = _matchedStyle.id;
-					} else {
+			//Handles stroke and looks up matching id for mode
+			if (node.strokeStyleId) {
+				let style = node.strokeStyleId.split(":")[1];
+				let _styledID = `${style.split(",")[0]}`;
+				let currentName = StyledIDs[_styledID].name;
+				let context = `${mode}/${currentName.split("/")[1]}`;
+				if (context) {
+					for (let _id in StyledIDs) {
+						if (StyledIDs[_id].name == context) {
+							const currentStyle: BaseStyle =
+								await figma.importStyleByKeyAsync(_id); //fetch current style
+							node.strokeStyleId = currentStyle.id;
+							break;
+						}
 					}
 				}
 			}
+			Notify(
+				"🔮 Successfully switch the them to matching token color style.",
+				false
+			);
+		} catch (error) {
+			Notify("🙈 Oh no something went wrong undo and try again.", true);
 		}
 	}
 }
-
 /**
  * Uses native Figma toast messaging system to let the user know of important information or errors that have happen in the plugin.
  * @param Message
@@ -295,12 +266,19 @@ function ExportLocalColorStyles() {
 	}
 	LocalColorStyles.forEach((style) => {
 		if (!style.id) return;
-		Formatted_LocalColorStyles[style.id] = {
+		let formmatedID = style.id.substring(2, style.id.length - 1);
+		Formatted_LocalColorStyles[formmatedID] = {
 			name: style.name,
 			description: style.description,
 		};
 	});
-	console.log(JSON.stringify(Formatted_LocalColorStyles));
+	let data = JSON.stringify(Formatted_LocalColorStyles);
+	console.log(data);
+	var message = {
+		type: "exported-styled-ids",
+		message: data,
+	};
+	figma.ui.postMessage(message);
 }
 
 /** Updating local styles will sync with the WPDS json tokens and any current paintstyles

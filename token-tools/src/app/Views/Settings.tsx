@@ -3,8 +3,8 @@ import Header from "../components/Headers";
 import Divider from "../components/divider";
 import UpdateLocalStyles from "../controls/update-local-paint-styles";
 import CreateLocalStyles from "../controls/create-local-paint-styles";
-
-export default function Main() {
+import ExportStyleIDs from "../controls/export-local-ids";
+export default function Main({ exportedData }) {
 	return (
 		<>
 			<Header>Plugin Settings</Header>
@@ -12,6 +12,7 @@ export default function Main() {
 			<Divider />
 			<CreateLocalStyles />
 			<Divider />
+			<ExportStyleIDs exportedData={exportedData} />
 		</>
 	);
 }

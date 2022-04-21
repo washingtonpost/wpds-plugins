@@ -192,10 +192,10 @@ export default function TokenSelector({
 }) {
 	const data = {
 		dark: {
-			value: "true",
+			value: "dark",
 		},
 		light: {
-			value: "false",
+			value: "light",
 		},
 	};
 	const tokenData = tokenPath == "none" ? data : Tokens[tokenPath];

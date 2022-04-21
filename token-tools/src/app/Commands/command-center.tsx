@@ -54,6 +54,11 @@ function CommandCenter(command, tokenName) {
 				{ pluginMessage: { type: "create-color-tokens" } },
 				"*"
 			);
+		case "export-local-color-tokens":
+			parent.postMessage(
+				{ pluginMessage: { type: "export-local-color-tokens" } },
+				"*"
+			);
 		default:
 			parent.postMessage(
 				{ pluginMessage: { type: "update-color-tokens" } },
