@@ -10,3 +10,8 @@ The `controller. tsx` is the file that interacts with Figma program. It applies 
 Learn more about WPDS [@build.washingtonpost.com](https://build.washingtonpost.com)
 
 
+
+## Getting started
+Clone the repo and run `npm intall` (NPM is required and yarn will not work)
+
+Go to Figma > Plugins > Development > Import from manifest and link to the manifest found in this repo. You will need to provide your own ID if you are going to publish it. 
