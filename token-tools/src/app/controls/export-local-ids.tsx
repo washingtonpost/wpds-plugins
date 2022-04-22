@@ -43,7 +43,7 @@ export default function ExportStyleIDs({ exportedData }) {
 		<>
 			<Layout>
 				<Header as="h2" css={{ gridColumn: "span 2" }}>
-					Export Local Color style IDS
+					Export Local Color style IDs
 				</Header>
 				<Paragraph>
 					Figma requires all style ids to be hard coded{" "}

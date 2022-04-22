@@ -2,7 +2,6 @@ import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
 import StyledIDs from "../localPaintStyleIDs.json";
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
-
 //Enables and disable map buttons
 figma.on("selectionchange", async () => {
 	if (figma.currentPage.selection.length === 0) {
@@ -313,7 +312,7 @@ function UpdateLocalStyles() {
 			const alias = tokenPath[1];
 			let reference = Tokens.color.theme[tokenPath[1]].value;
 			reference = reference.substring(1, reference.length - 1);
-			const lookUpValue = FindReference(reference);
+			const lookUpValue = FindReference(reference, tokenPath[0]);
 
 			const RGB = GetRGB(lookUpValue);
 			const _alpha = GetAlpha(lookUpValue);
@@ -364,7 +363,7 @@ function CreateColorTokens() {
 								1,
 								Value.length - 1
 							);
-							Value = FindReference(reference);
+							Value = FindReference(reference, ColorGroup);
 						}
 
 						const RGB = GetRGB(Value);
@@ -446,11 +445,11 @@ function CreateColorTokens() {
  * @param alias
  * @returns
  */
-function FindReference(alias) {
+function FindReference(alias, context) {
 	if (alias.includes("-static")) {
 		return Tokens.color.static[alias.substring(0, alias.length - 7)].value;
 	} else {
-		return Tokens.color.light[alias].value;
+		return Tokens.color[context][alias].value;
 	}
 }
 
