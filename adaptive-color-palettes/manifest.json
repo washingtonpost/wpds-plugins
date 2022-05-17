@@ -1,8 +1,0 @@
-{
-	"name": "Adaptive Color Palettes",
-	"id": "1108131220701866389",
-	"api": "1.0.0",
-	"main": "dist/code.js",
-	"ui": "dist/ui.html",
-	"editorType": ["figma"]
-}
