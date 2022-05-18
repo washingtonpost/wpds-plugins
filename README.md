@@ -2,6 +2,10 @@
 
 Welcome to our mono-repo of plugin and extension mantain by the WPDS team.
 
+## Adaptive color example
+
+[Read more](/adaptive-color-palettes/README.md) about our adaptive color generator for color tokens. [Link to color palette html](./adaptive-color-palettes/index.html).
+
 ## Publish ZEM extensions
 
 1. Add `ZEM_ACCESS_TOKEN` to your node environment variables using this config
