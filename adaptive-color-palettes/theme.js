@@ -6,7 +6,6 @@ const {
 const CurrentPalette = require("./ColorPalette");
 const Config = require("./Config");
 const fs = require("fs");
-const { config } = require("process");
 let LeonardoPalette = []; //Holds colors for Leonardo
 
 //Start of script
@@ -37,10 +36,14 @@ function PrepareData() {
 /**Sets up Leonardo color palette if you like to adjust the lightness, contrast, and saturation modify the global variables found int eh Config.js. */
 function SetUpTheme() {
 	if (!LeonardoPalette.length) return;
+	let leoBackground = Config.LeonardoBackground;
+	if (Config.LeonardoBackground == "#") {
+		_value = hexToRgbA(_value);
+	}
 	let context = new BackgroundColor({
 		name: "context",
 		colorKeys: ["#FFFFFF"],
-		ratios: [21],
+		ratios: [contrast([255, 255, 255], leoBackground)],
 	});
 
 	let theme = new Theme({
@@ -58,7 +61,13 @@ function SetUpTheme() {
 			};
 		}
 	});
-	CreateFiles(JSON.stringify(NewTheme));
+	let RGBATheme = {};
+	for (let Token in NewTheme) {
+		RGBATheme[Token] = {
+			value: `rgba(${[...hexToRgbA(NewTheme[Token].value), 1]})`,
+		};
+	}
+	CreateFiles(JSON.stringify(RGBATheme));
 }
 /**
  * This function creates new_theme.html and new_theme.json
@@ -68,11 +77,7 @@ function SetUpTheme() {
 function CreateFiles(content) {
 	try {
 		fs.writeFile("./new_theme.json", content, (err) => {
-			fs.writeFile(
-				"./new_theme.html",
-				HTMLContent(NewTheme),
-				(err) => {}
-			);
+			fs.writeFile("./new_theme.html", HTMLContent(content), (err) => {});
 		});
 	} catch (error) {
 		console.log(error);
@@ -153,7 +158,7 @@ const HTMLContent = (NewTheme) => {
 
 	</body>
 	<script>
-		const colors=${JSON.stringify(NewTheme)}
+		const colors=${NewTheme}
 		for(token in colors){
 			let node=document.createElement("div");
 			let p=document.createElement("p");
