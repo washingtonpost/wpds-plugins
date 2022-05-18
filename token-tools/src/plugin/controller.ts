@@ -1,5 +1,6 @@
 import Tokens from "@washingtonpost/wpds-theme/src/wpds.tokens.json";
 import StyledIDs from "../localPaintStyleIDs.json";
+
 //Initialize Plugin
 figma.showUI(__html__, { width: 380, height: 700 });
 //Enables and disable map buttons

@@ -1,0 +1,17 @@
+{
+	"name": "tokens",
+	"version": "1.0.0",
+	"description": "",
+	"main": "tokenGenerator.js",
+	"scripts": {
+		"build": "node theme.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@adobe/leonardo-contrast-colors": "^1.0.0-alpha.13",
+		"json-2-csv": "^3.17.1",
+		"tsv": "^0.2.0"
+	}
+}
