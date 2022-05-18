@@ -10,13 +10,12 @@ To start run `npm i` and modify the `ColorPalette.json` file with the color pale
 Name_of_token:{value:"hex_or_rgb_value"}
 ```
 
-Modify the `Config.js` to set up the values of the output of the new color theme. Once all is set and done run `npm run build` and it will generate a new `new_theme.json` and `new_theme.html` to see the color output of the new colors.
+Modify the `Config.js` to set up the values of the output of the new color theme. Once all is set and done run `npm run build` and it will generate a new `new_theme.json` and `index.html` to see the color output of the new colors.
 
 You can then use that file to add it to your color token file as a new theme.
 
 **Example of Html file**
 ![Screen Shot 2022-05-18 at 7 32 33 PM](https://user-images.githubusercontent.com/6046591/169171994-6540f157-0382-4975-b15e-c79586299d70.png)
-
 
 ### More information
 

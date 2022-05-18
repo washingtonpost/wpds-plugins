@@ -77,7 +77,7 @@ function SetUpTheme() {
 function CreateFiles(content) {
 	try {
 		fs.writeFile("./new_theme.json", content, (err) => {
-			fs.writeFile("./new_theme.html", HTMLContent(content), (err) => {});
+			fs.writeFile("./index.html", HTMLContent(content), (err) => {});
 		});
 	} catch (error) {
 		console.log(error);
