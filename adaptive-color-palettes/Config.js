@@ -1,4 +1,4 @@
-/**This config file is used to change the output of the files generated in teh new_theme json & html. For more indepth of the following settings (lightness, contrast,) */
+/**This config file is used to change the output of the files generated in the new_theme json & html. For more indepth of the following settings (lightness, contrast,) */
 const Config = {
 	lightness: 0,
 	contrast: 1,

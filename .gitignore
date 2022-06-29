@@ -115,6 +115,9 @@ out
 # coverage
 jest-coverage
 
+# code editor + IDE plugins 
+.history/*
+
 .DS_Store
 
 .yalc

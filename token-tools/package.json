@@ -12,7 +12,7 @@
 		"@radix-ui/react-checkbox": "^0.1.5",
 		"@radix-ui/react-icons": "^1.1.0",
 		"@radix-ui/react-popover": "^0.1.6",
-		"@stitches/react": "^1.2.6",
+		"@stitches/react": "^1.2.8",
 		"@washingtonpost/wpds-assets": "^1.6.0",
 		"@washingtonpost/wpds-ui-kit": "^0.6.2",
 		"react": "^17.0.2",

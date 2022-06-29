@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { styled } from "../../stitches.config";
 import CommandCenter from "../Commands/command-center";
-import { Button } from "../components/button";
+import Button from "../components/button";
 import Header from "../components/Headers";
 import { StyledLink } from "../components/link";
 import Paragraph from "../components/paragraph";
 import Layout from "./layout";
 
-export default function UpdateLocalStyles() {
+export default function CreateLocalStyles() {
 	const [ConfirmAction, setConfirmAction] = useState(false);
 	const ChoiceContainer = styled("div", {
 		display: "grid",
@@ -38,13 +38,13 @@ export default function UpdateLocalStyles() {
 			{ConfirmAction ? (
 				<ChoiceContainer>
 					<Button
-						variant={"destructive"}
+						variant="destructive"
 						onClick={() => setConfirmAction(false)}
 					>
 						Cancel
 					</Button>
 					<Button
-						variant={"default"}
+						variant="default"
 						css={{ width: "100%" }}
 						onClick={HandleConfirm}
 					>
@@ -53,7 +53,7 @@ export default function UpdateLocalStyles() {
 				</ChoiceContainer>
 			) : (
 				<Button
-					variant={"default"}
+					variant="default"
 					onClick={() => setConfirmAction(!ConfirmAction)}
 				>
 					Generate Tokens

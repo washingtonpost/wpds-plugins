@@ -1,5 +1,6 @@
 import { styled } from "@stitches/react";
 import { theme } from "../../stitches.config";
+
 export const Button = styled("button", {
 	width: 120,
 	height: 30,
@@ -30,3 +31,5 @@ export const Button = styled("button", {
 		},
 	},
 });
+
+export default Button;
