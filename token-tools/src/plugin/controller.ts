@@ -15,9 +15,10 @@ figma.on("selectionchange", async () => {
 
 //Handles input from plugin interface
 figma.ui.onmessage = async (msg) => {
-	let nodes;
+	let nodes: any;
 	switch (msg.type) {
 		case "set-theme":
+			console.log({ msg });
 			nodes = SelectNodes(false);
 			ToggleTheme(nodes, msg.token);
 			break;
@@ -163,7 +164,7 @@ function ToggleTheme(nodes, mode: boolean) {
 	});
 }
 
-async function switchTheme(node, mode) {
+async function switchTheme(node, mode: boolean) {
 	//iterate through children if the node has them
 	if (node.children) {
 		node.children.forEach((child) => {
@@ -188,11 +189,12 @@ async function switchTheme(node, mode) {
 		try {
 			//Handles fills and looks up matching id for mode
 			if (node.fillStyleId) {
-				let style = node.fillStyleId.split(":")[1];
-				let _styledID = `${style.split(",")[0]}`;
-				let currentName = StyledIDs[_styledID].name;
-				console.log(currentName);
-				let context = `${mode}/${currentName.split("/")[1]}`;
+				const style = node.fillStyleId.split(":")[1];
+				const _styledID = `${style.split(",")[0]}`;
+				const currentName = StyledIDs[_styledID].name;
+				console.log("Original color", currentName);
+				const context = `${mode}/${currentName.split("/")[1]}`;
+				console.log({context})
 				if (context) {
 					for (let _id in StyledIDs) {
 						if (StyledIDs[_id].name == context) {
@@ -273,7 +275,6 @@ function ExportLocalColorStyles() {
 		};
 	});
 	let data = JSON.stringify(Formatted_LocalColorStyles);
-	console.log(data);
 	var message = {
 		type: "exported-styled-ids",
 		message: data,
