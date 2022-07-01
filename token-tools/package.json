@@ -1,6 +1,6 @@
 {
-	"name": "figma-plugin-react-template",
-	"version": "1.0.0",
+	"name": "@washingtonpost/token-tools",
+	"version": "1.1.0",
 	"description": "This plugin template uses Typescript. If you are familiar with Javascript, Typescript will look very familiar. In fact, valid Javascript code is already valid Typescript code.",
 	"license": "ISC",
 	"scripts": {
@@ -14,6 +14,7 @@
 		"@radix-ui/react-popover": "^0.1.6",
 		"@stitches/react": "^1.2.6",
 		"@washingtonpost/wpds-assets": "^1.6.0",
+		"@washingtonpost/wpds-theme": "^0.11.1",
 		"@washingtonpost/wpds-ui-kit": "^0.6.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"

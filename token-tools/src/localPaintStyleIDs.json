@@ -1,28 +1,4 @@
 {
-	"9a9b1b6647bbd9f2765e9bd7f6435d46dcdd411b": {
-		"name": "light/alpha25",
-		"description": ""
-	},
-	"6bc148567c73b5342f9ac2ba214ae2de7accd451": {
-		"name": "light/alpha50",
-		"description": ""
-	},
-	"caa8e4a6b660aa0f5601c466086f19cf3f8283a8": {
-		"name": "light/blue80",
-		"description": ""
-	},
-	"fa5a6e8e2439098e76d0d3c558d26ed158bc8ddb": {
-		"name": "light/blue100",
-		"description": ""
-	},
-	"50da8103f96e77cb86f7aad7263bec4f07fc839b": {
-		"name": "light/blue200",
-		"description": ""
-	},
-	"8515450ca52b49f63983a76ed2fda3795f75ec75": {
-		"name": "light/blue300",
-		"description": ""
-	},
 	"90fac2f1dd81d53cfbf143119a8a87cb57dfe176": {
 		"name": "light/gray0",
 		"description": ""
@@ -45,7 +21,7 @@
 	},
 	"4424655835587726abb0c2c12b57bccd0056c0b1": {
 		"name": "light/gray100",
-		"description": "#AAAAA"
+		"description": ""
 	},
 	"e72d26a444b2654acd4e4f7e233ead942a82e9c3": {
 		"name": "light/gray200",
@@ -67,84 +43,16 @@
 		"name": "light/gray600",
 		"description": ""
 	},
-	"fa065c85cb593ba1fb9220c26c667b26d5b3ad6a": {
-		"name": "light/green80",
+	"e5f6b2cdc5f55317f20985f6105862f05ec79908": {
+		"name": "light/gray700",
 		"description": ""
 	},
-	"8d4e101b422a060375d0f1244510fe0b0c052c0b": {
-		"name": "light/green100",
+	"9a9b1b6647bbd9f2765e9bd7f6435d46dcdd411b": {
+		"name": "light/alpha25",
 		"description": ""
 	},
-	"5d00366af9de715c977e97e78826cb150c94aee0": {
-		"name": "light/green200",
-		"description": ""
-	},
-	"05dd12ae88c8a80e8a8486fcdb4f4358dfa46e68": {
-		"name": "light/green300",
-		"description": ""
-	},
-	"a3826095fbe1b7cc7487d4cbbd1f19f47f1a86b0": {
-		"name": "light/gold80",
-		"description": ""
-	},
-	"d4a5d014623e11bb565bb736310c857bf6a0b35c": {
-		"name": "light/gold100",
-		"description": ""
-	},
-	"118472fc59fd31ad53a845fa251c668d0f672774": {
-		"name": "light/gold200",
-		"description": ""
-	},
-	"de4df467e7bc0a7ceabedf5c62ddd24bad5fe2b7": {
-		"name": "light/gold300",
-		"description": ""
-	},
-	"d6f15b6eb49cff53ec9b2544d0aa926f538e01da": {
-		"name": "light/orange100",
-		"description": ""
-	},
-	"007e0ac3a26b1e9b8d5ef32a2f5beed2697b1b2e": {
-		"name": "light/orange80",
-		"description": ""
-	},
-	"406e5dc31e73dd0b5fe5090140e560f9959869b2": {
-		"name": "light/orange200",
-		"description": ""
-	},
-	"bf514bee2d25b55fb0f706c336dd6f61370ebab7": {
-		"name": "light/orange300",
-		"description": ""
-	},
-	"1b8650d469e674b2536f6603c75fe217fc46b08f": {
-		"name": "light/red80",
-		"description": ""
-	},
-	"1605ca834f0c93affd40a0947bb59fc586851bab": {
-		"name": "light/red100",
-		"description": ""
-	},
-	"0b3b2fd8d50c632c00212badd83025c33324ef35": {
-		"name": "light/red200",
-		"description": ""
-	},
-	"0fa9e977c91771d0f925f0607cd1a2d43802c30e": {
-		"name": "light/red300",
-		"description": ""
-	},
-	"ab8ac1a8da1a8b4eb6901fb4cd710e632ee24de6": {
-		"name": "light/vividBlue80",
-		"description": ""
-	},
-	"46934bccf347d1a6a4a6374e5114dc4185de6e71": {
-		"name": "light/vividBlue100",
-		"description": ""
-	},
-	"56e1f2d49729462c0312651150eeeaa13464cafe": {
-		"name": "light/vividBlue200",
-		"description": ""
-	},
-	"8c332ab7c7d352a2077061da92ee70fe1219eaba": {
-		"name": "light/vividBlue300",
+	"6bc148567c73b5342f9ac2ba214ae2de7accd451": {
+		"name": "light/alpha50",
 		"description": ""
 	},
 	"819a673dc8d822afaa36b63a3aea4671a41219b0": {
@@ -170,6 +78,10 @@
 	"b2da83d30234d1237073c562334af415bdfded47": {
 		"name": "light/onCta",
 		"description": "{gray600-static}"
+	},
+	"5a7b610b3e66428d32695c2cd1c889f2b39697b6": {
+		"name": "light/faint",
+		"description": ""
 	},
 	"3b2c4263e37161f4fc2f92d59c8f895894c03cf6": {
 		"name": "light/subtle",
@@ -207,28 +119,336 @@
 		"name": "light/disabled",
 		"description": "{alpha25}"
 	},
-	"38f038e80d6751af7aee827b2e2c484e51d680fb": {
-		"name": "dark/alpha25",
+	"946f4507ae2b3eaf90d1099e1c41de6dc7cd5919": {
+		"name": "light/blue40",
 		"description": ""
 	},
-	"09b1f8194902b22955013e4cadde19ade44c5eea": {
-		"name": "dark/alpha50",
+	"fedf9b4947be7edfd30f08c1abc8f75dac0166db": {
+		"name": "light/blue60",
 		"description": ""
 	},
-	"75b21fb2b7ae4fefc35a288d4e7d61d22e2bdc97": {
-		"name": "dark/blue80",
+	"caa8e4a6b660aa0f5601c466086f19cf3f8283a8": {
+		"name": "light/blue80",
 		"description": ""
 	},
-	"5c9cc832caef6d101420d77e782caf26df00b619": {
-		"name": "dark/blue100",
+	"fa5a6e8e2439098e76d0d3c558d26ed158bc8ddb": {
+		"name": "light/blue100",
 		"description": ""
 	},
-	"5bd04c1a2256f8cdd81bde1adf9aeb3cf5bc33b7": {
-		"name": "dark/blue200",
+	"50da8103f96e77cb86f7aad7263bec4f07fc839b": {
+		"name": "light/blue200",
 		"description": ""
 	},
-	"7746f237f931d4fd3ee7fef4c3d073762ff51f43": {
-		"name": "dark/blue300",
+	"8515450ca52b49f63983a76ed2fda3795f75ec75": {
+		"name": "light/blue300",
+		"description": ""
+	},
+	"a5be87619f7aa4c696d6c98dd5f52602e2f8b657": {
+		"name": "light/blue400",
+		"description": ""
+	},
+	"6a1ae132403fe3198a905367974df8b4762444d8": {
+		"name": "light/blue500",
+		"description": ""
+	},
+	"e20353cd66dc0d3134c0719ae74f7ab5d05cfa34": {
+		"name": "light/blue600",
+		"description": ""
+	},
+	"f707d265df402355601ef625c37df5e7eb015bad": {
+		"name": "light/green40",
+		"description": ""
+	},
+	"0b2d552563b12040e7f60e471b0e80760449ccf1": {
+		"name": "light/green60",
+		"description": ""
+	},
+	"fa065c85cb593ba1fb9220c26c667b26d5b3ad6a": {
+		"name": "light/green80",
+		"description": ""
+	},
+	"8d4e101b422a060375d0f1244510fe0b0c052c0b": {
+		"name": "light/green100",
+		"description": ""
+	},
+	"5d00366af9de715c977e97e78826cb150c94aee0": {
+		"name": "light/green200",
+		"description": ""
+	},
+	"05dd12ae88c8a80e8a8486fcdb4f4358dfa46e68": {
+		"name": "light/green300",
+		"description": ""
+	},
+	"b0a557751cee0ae7c3d1726f18f1791a9438b475": {
+		"name": "light/green400",
+		"description": ""
+	},
+	"a59fc09ce89c4afe9bddf47dd56a604ae031531e": {
+		"name": "light/green500",
+		"description": ""
+	},
+	"87b1ddc31e5f7a288b6b0160091f590a5fe092fd": {
+		"name": "light/green600",
+		"description": ""
+	},
+	"87b20236a68c1cc518f27d2664dae1b8bc5f3e74": {
+		"name": "light/gold40",
+		"description": ""
+	},
+	"e089e1012c6de926d329cd1af6ea6ea9a4458294": {
+		"name": "light/gold60",
+		"description": ""
+	},
+	"a3826095fbe1b7cc7487d4cbbd1f19f47f1a86b0": {
+		"name": "light/gold80",
+		"description": ""
+	},
+	"d4a5d014623e11bb565bb736310c857bf6a0b35c": {
+		"name": "light/gold100",
+		"description": ""
+	},
+	"118472fc59fd31ad53a845fa251c668d0f672774": {
+		"name": "light/gold200",
+		"description": ""
+	},
+	"de4df467e7bc0a7ceabedf5c62ddd24bad5fe2b7": {
+		"name": "light/gold300",
+		"description": ""
+	},
+	"52b3f4c92d0a7a9d9a4925e3e7ca37b8efa4d321": {
+		"name": "light/gold400",
+		"description": ""
+	},
+	"472df90a3b0e23f56c074af7c749ca9433e0d13b": {
+		"name": "light/gold500",
+		"description": ""
+	},
+	"faeb212ded8c7385ffa66bea60c42cd6630f1856": {
+		"name": "light/gold600",
+		"description": ""
+	},
+	"ea923222749c1cbf61355dc0cdd04251f21c0219": {
+		"name": "light/orange40",
+		"description": ""
+	},
+	"931c675a0b68bc93097893aac0e802d7fc70cedc": {
+		"name": "light/orange60",
+		"description": ""
+	},
+	"007e0ac3a26b1e9b8d5ef32a2f5beed2697b1b2e": {
+		"name": "light/orange80",
+		"description": ""
+	},
+	"d6f15b6eb49cff53ec9b2544d0aa926f538e01da": {
+		"name": "light/orange100",
+		"description": ""
+	},
+	"406e5dc31e73dd0b5fe5090140e560f9959869b2": {
+		"name": "light/orange200",
+		"description": ""
+	},
+	"bf514bee2d25b55fb0f706c336dd6f61370ebab7": {
+		"name": "light/orange300",
+		"description": ""
+	},
+	"7e7d4a8c47c82be37812d566ea39b38e391ef1fa": {
+		"name": "light/orange400",
+		"description": ""
+	},
+	"d954e0b9b2b6872c830e7c9a9afee7f7ca0d22ff": {
+		"name": "light/orange500",
+		"description": ""
+	},
+	"7f6846efb96d9341f7ce5880f1fde80703a37ac4": {
+		"name": "light/orange600",
+		"description": ""
+	},
+	"f9088749e0a122562449d58e94d43bc770fc2833": {
+		"name": "light/red40",
+		"description": ""
+	},
+	"1ca69f58a3215962ce4a05bc10aaf5198a5a31a6": {
+		"name": "light/red60",
+		"description": ""
+	},
+	"1b8650d469e674b2536f6603c75fe217fc46b08f": {
+		"name": "light/red80",
+		"description": ""
+	},
+	"1605ca834f0c93affd40a0947bb59fc586851bab": {
+		"name": "light/red100",
+		"description": ""
+	},
+	"0b3b2fd8d50c632c00212badd83025c33324ef35": {
+		"name": "light/red200",
+		"description": ""
+	},
+	"0fa9e977c91771d0f925f0607cd1a2d43802c30e": {
+		"name": "light/red300",
+		"description": ""
+	},
+	"d8d44cd2e1fad4b8c98958cc463ce9c197a376f2": {
+		"name": "light/red400",
+		"description": ""
+	},
+	"c13db37b14c26a90b190d8192929db462edc2835": {
+		"name": "light/red500",
+		"description": ""
+	},
+	"929f6b8abeeae44ea0a5d871a2b9a356756d238b": {
+		"name": "light/red600",
+		"description": ""
+	},
+	"230e07479a18264a397e02b3ca61d31355bb3a82": {
+		"name": "light/pink40",
+		"description": ""
+	},
+	"3d4f25eefaeb9b7bdf596395d1cfe5dd40b33d19": {
+		"name": "light/pink60",
+		"description": ""
+	},
+	"1b0cc8ccaf0fcb724e7e08cac486b7d922668d16": {
+		"name": "light/pink80",
+		"description": ""
+	},
+	"9512402dace725fa448cfe7b323a42fa15e60371": {
+		"name": "light/pink100",
+		"description": ""
+	},
+	"db48869ddb860442b099d2a99b9cffb1c5949ae4": {
+		"name": "light/pink200",
+		"description": ""
+	},
+	"a1e620130fd3c4bbbf5af117af75d6739be3f068": {
+		"name": "light/pink300",
+		"description": ""
+	},
+	"8aca920e2bddcbc8ec270031423abd235643f081": {
+		"name": "light/pink400",
+		"description": ""
+	},
+	"34da8a01ebf32ac8d547a1bc10dcf345d914f493": {
+		"name": "light/pink500",
+		"description": ""
+	},
+	"29d9928caf6a60c1c2d7634495381a29d70a17b1": {
+		"name": "light/pink600",
+		"description": ""
+	},
+	"39f6a953ecf15cdbaa35da964206126ac1b9f4b9": {
+		"name": "light/purple40",
+		"description": ""
+	},
+	"6661d1e97198cb58cc2a1a6d00368d0af663d74e": {
+		"name": "light/purple60",
+		"description": ""
+	},
+	"5419c8fb872fb35fd2b8e302f129ef4d989bcb5c": {
+		"name": "light/purple80",
+		"description": ""
+	},
+	"9c0e305689e5bb0bcfcbbe39eea27db6264083f1": {
+		"name": "light/purple100",
+		"description": ""
+	},
+	"78788fdcdf00aac03976e564fe7bef112e66e1b2": {
+		"name": "light/purple200",
+		"description": ""
+	},
+	"0598f7756a0b82eba42d2cf677c688f7d0f32921": {
+		"name": "light/purple300",
+		"description": ""
+	},
+	"bf97cb676ff3e96e53206e04af1f249535df9765": {
+		"name": "light/purple400",
+		"description": ""
+	},
+	"321d83fb932976536639a85f58a245bb7f46170a": {
+		"name": "light/purple500",
+		"description": ""
+	},
+	"1e23314988464eb3733fb96281f6520ffe829df0": {
+		"name": "light/purple600",
+		"description": ""
+	},
+	"b5ee1b647f2382631ea83255fa18b4e8db410e60": {
+		"name": "light/teal40",
+		"description": ""
+	},
+	"b9ff965de1c567001875de2e5e697914435f6ff7": {
+		"name": "light/teal60",
+		"description": ""
+	},
+	"015f2003dbe7007a8aa4982f9108e1d91981c02a": {
+		"name": "light/teal80",
+		"description": ""
+	},
+	"28404999e753035bff09c6ec98da20d915c4da99": {
+		"name": "light/teal100",
+		"description": ""
+	},
+	"f49f59bc349d5b84986efe622309567217961a1e": {
+		"name": "light/teal200",
+		"description": ""
+	},
+	"bf56e0b2a2e4fbfbc7fa6c225c4e5cfa3a8d7876": {
+		"name": "light/teal300",
+		"description": ""
+	},
+	"2bac518675e41f94158fcc3e6323e5db06fb7844": {
+		"name": "light/teal400",
+		"description": ""
+	},
+	"0acdb8faf9e069ca31242033e783c9e48cf9f56e": {
+		"name": "light/teal500",
+		"description": ""
+	},
+	"b38918b7d6953c6bf2c5c4dca7cbcdd882ce3e85": {
+		"name": "light/teal600",
+		"description": ""
+	},
+	"9f9de6821421de2153024419b3a0f11b001bfbc0": {
+		"name": "light/yellow100",
+		"description": ""
+	},
+	"f219adf161de90e913e61a0b244d090b837cec52": {
+		"name": "light/yellow600",
+		"description": ""
+	},
+	"87aaf7d349246dbc850fe987be9ade8cf0d8abf9": {
+		"name": "light/mustard40",
+		"description": ""
+	},
+	"2ecdd6f3338b34915c7a34407711141c87b58b1c": {
+		"name": "light/mustard60",
+		"description": ""
+	},
+	"f9fcafa0bd5390ca79fa50019c401bd05c5d0676": {
+		"name": "light/mustard80",
+		"description": ""
+	},
+	"b3e5d21a96930fdf76f73de772084fd1da476c99": {
+		"name": "light/mustard100",
+		"description": ""
+	},
+	"6d1d4f00905433242de90e4594f6621d504c6fef": {
+		"name": "light/mustard200",
+		"description": ""
+	},
+	"6c80c1e4f2ba8dfccd900da504e9531389a83291": {
+		"name": "light/mustard300",
+		"description": ""
+	},
+	"6dfa376e3f450adc5d1e7ae5e98246590ddfdf7f": {
+		"name": "light/mustard400",
+		"description": ""
+	},
+	"c4b43e623424fe90afcf652ecbc68de357e227d0": {
+		"name": "light/mustard500",
+		"description": ""
+	},
+	"b25339b0fa7c2e9c5d55f136b2575bdc62721137": {
+		"name": "light/mustard600",
 		"description": ""
 	},
 	"721151bb47b7a3a4060bc8aa901bd974c8db5bb7": {
@@ -275,84 +495,16 @@
 		"name": "dark/gray600",
 		"description": ""
 	},
-	"4fa05fc42e81975389ce5c3220fd22fd31475f2e": {
-		"name": "dark/green80",
+	"9ab383991536ea9a9679846d03614eb79b30ea51": {
+		"name": "dark/gray700",
 		"description": ""
 	},
-	"b6bd405a7c57ffe97042e5b7316354a14c8630f0": {
-		"name": "dark/green100",
+	"38f038e80d6751af7aee827b2e2c484e51d680fb": {
+		"name": "dark/alpha25",
 		"description": ""
 	},
-	"c241bce1956f75a43dfad5a6cd7043269d2d040a": {
-		"name": "dark/green200",
-		"description": ""
-	},
-	"51a8c5eca3acc9e2375921f2a937552ad56afd4a": {
-		"name": "dark/green300",
-		"description": ""
-	},
-	"f4c2b23d4a834c346aa74b13fc70950bbff97e5b": {
-		"name": "dark/gold80",
-		"description": ""
-	},
-	"5e8e1ea2aeb024c7b0f21d0b7ea38313ff2862d6": {
-		"name": "dark/gold100",
-		"description": ""
-	},
-	"d6c8e52b16c7908fedb0667dd7733f30e17820fd": {
-		"name": "dark/gold200",
-		"description": ""
-	},
-	"43dc03baad9309ade447c3b0111572da5fa4b8d3": {
-		"name": "dark/gold300",
-		"description": ""
-	},
-	"57b8905ac4cf1becc7986ab194954cecaa050ff2": {
-		"name": "dark/orange80",
-		"description": ""
-	},
-	"9d789be9b50b7adbb4fba3006e8976d72e11fb5d": {
-		"name": "dark/orange100",
-		"description": ""
-	},
-	"e6af9917810f6920fffc3ab1d9920284a6a624d4": {
-		"name": "dark/orange200",
-		"description": ""
-	},
-	"7eedd43761d68b16091ef02f8e37764a9a4351c9": {
-		"name": "dark/orange300",
-		"description": ""
-	},
-	"a885a4e5723ae14f54809c3a2dd46e28a4e5ff8f": {
-		"name": "dark/red80",
-		"description": ""
-	},
-	"cfbf5cfe42a96ce54d7779f914bc596afd40d4ed": {
-		"name": "dark/red100",
-		"description": ""
-	},
-	"4490169969eb9114ab1a539d393777d5c793505d": {
-		"name": "dark/red200",
-		"description": ""
-	},
-	"0b9757a8fcde0ab72517d356bb6727e29f5b955e": {
-		"name": "dark/red300",
-		"description": ""
-	},
-	"9577eec95ba1064d927c185e849515b8145578c5": {
-		"name": "dark/vividBlue80",
-		"description": ""
-	},
-	"3442d4554b8cf550080cfb9ea75aa435fb730952": {
-		"name": "dark/vividBlue100",
-		"description": ""
-	},
-	"e6cfd6df4d40f99ff3d176225675bcb2550f156d": {
-		"name": "dark/vividBlue200",
-		"description": ""
-	},
-	"6d7f26863cdb0f919daa8c071b2bb52dcf48e881": {
-		"name": "dark/vividBlue300",
+	"09b1f8194902b22955013e4cadde19ade44c5eea": {
+		"name": "dark/alpha50",
 		"description": ""
 	},
 	"04dec82dfbe2e69ecc0438ebdb7b05712aeef23f": {
@@ -378,6 +530,10 @@
 	"7cdae6df8296c3b6237c4c78b847328d94360a7f": {
 		"name": "dark/onCta",
 		"description": "{gray600-static}"
+	},
+	"84789e5072b3302dfd1b656be7d928960f774d69": {
+		"name": "dark/faint",
+		"description": ""
 	},
 	"7437a0d80d3c3ee978e9a593940970a19916e6d5": {
 		"name": "dark/subtle",
@@ -414,6 +570,338 @@
 	"2678d0832078b1d20459951f9f2e47046257ebe4": {
 		"name": "dark/disabled",
 		"description": "{alpha25}"
+	},
+	"a5952622c5b383b36821aa560b19016bf4398485": {
+		"name": "dark/blue40",
+		"description": ""
+	},
+	"e9c3cca36043a79d76b5483238f3d16e19cdf914": {
+		"name": "dark/blue60",
+		"description": ""
+	},
+	"75b21fb2b7ae4fefc35a288d4e7d61d22e2bdc97": {
+		"name": "dark/blue80",
+		"description": ""
+	},
+	"5c9cc832caef6d101420d77e782caf26df00b619": {
+		"name": "dark/blue100",
+		"description": ""
+	},
+	"5bd04c1a2256f8cdd81bde1adf9aeb3cf5bc33b7": {
+		"name": "dark/blue200",
+		"description": ""
+	},
+	"7746f237f931d4fd3ee7fef4c3d073762ff51f43": {
+		"name": "dark/blue300",
+		"description": ""
+	},
+	"8af28222dbe165830c55aff8b0f06b53f66e3b81": {
+		"name": "dark/blue400",
+		"description": ""
+	},
+	"537bdf18e9aaf77e30393452a90749edbce0469f": {
+		"name": "dark/blue500",
+		"description": ""
+	},
+	"a4d1e58f017cc050d0b8bbebbe89269fafbc35d1": {
+		"name": "dark/blue600",
+		"description": ""
+	},
+	"74a92c2c5fea894615e52e241e835eb8255f57c1": {
+		"name": "dark/green40",
+		"description": ""
+	},
+	"6c129dce833ef090926474343740fdacc0d43780": {
+		"name": "dark/green60",
+		"description": ""
+	},
+	"4fa05fc42e81975389ce5c3220fd22fd31475f2e": {
+		"name": "dark/green80",
+		"description": ""
+	},
+	"b6bd405a7c57ffe97042e5b7316354a14c8630f0": {
+		"name": "dark/green100",
+		"description": ""
+	},
+	"c241bce1956f75a43dfad5a6cd7043269d2d040a": {
+		"name": "dark/green200",
+		"description": ""
+	},
+	"51a8c5eca3acc9e2375921f2a937552ad56afd4a": {
+		"name": "dark/green300",
+		"description": ""
+	},
+	"39777ca42b2ec17aa42f5ff1dd0125770b6fbc6a": {
+		"name": "dark/green400",
+		"description": ""
+	},
+	"b9edf1cb291561436326bb5e04085d14fa8c3f76": {
+		"name": "dark/green500",
+		"description": ""
+	},
+	"45fcecf34063bd5f736276b6f1019f72fc2bda29": {
+		"name": "dark/green600",
+		"description": ""
+	},
+	"755fb4ced0954cdeff77cdc285ef0dbe6d291dd1": {
+		"name": "dark/gold40",
+		"description": ""
+	},
+	"8ad115705f0974630621736b15a40be0af8130b3": {
+		"name": "dark/gold60",
+		"description": ""
+	},
+	"f4c2b23d4a834c346aa74b13fc70950bbff97e5b": {
+		"name": "dark/gold80",
+		"description": ""
+	},
+	"5e8e1ea2aeb024c7b0f21d0b7ea38313ff2862d6": {
+		"name": "dark/gold100",
+		"description": ""
+	},
+	"d6c8e52b16c7908fedb0667dd7733f30e17820fd": {
+		"name": "dark/gold200",
+		"description": ""
+	},
+	"43dc03baad9309ade447c3b0111572da5fa4b8d3": {
+		"name": "dark/gold300",
+		"description": ""
+	},
+	"cd803cb81425696d4ceb9d438e40e7f425bf5ad9": {
+		"name": "dark/gold400",
+		"description": ""
+	},
+	"48738775eda65cdd69984a957f49cae8704f15dc": {
+		"name": "dark/gold500",
+		"description": ""
+	},
+	"4b6e6b8425931b1607e43d2f4a0bd116475b7384": {
+		"name": "dark/gold600",
+		"description": ""
+	},
+	"b968d614cf55e7da7091f7166154b53031cd7e38": {
+		"name": "dark/orange40",
+		"description": ""
+	},
+	"949a1d7bb59d839e5862306738f70887db7c8ef2": {
+		"name": "dark/orange60",
+		"description": ""
+	},
+	"57b8905ac4cf1becc7986ab194954cecaa050ff2": {
+		"name": "dark/orange80",
+		"description": ""
+	},
+	"9d789be9b50b7adbb4fba3006e8976d72e11fb5d": {
+		"name": "dark/orange100",
+		"description": ""
+	},
+	"e6af9917810f6920fffc3ab1d9920284a6a624d4": {
+		"name": "dark/orange200",
+		"description": ""
+	},
+	"7eedd43761d68b16091ef02f8e37764a9a4351c9": {
+		"name": "dark/orange300",
+		"description": ""
+	},
+	"4ff57d153bb0007060fb71d18d982e7f0c4e8814": {
+		"name": "dark/orange400",
+		"description": ""
+	},
+	"616c4ca033886cc4cac45e9b2a38bddd6b6fc04c": {
+		"name": "dark/orange500",
+		"description": ""
+	},
+	"10c17a6eb4b7f5db1cd618916dee801e5f3744bb": {
+		"name": "dark/orange600",
+		"description": ""
+	},
+	"5510b913c242261976c7b8e2e4d5ac8e7346d678": {
+		"name": "dark/red40",
+		"description": ""
+	},
+	"b853d506d5e022b1c7d930d9921f527a65982554": {
+		"name": "dark/red60",
+		"description": ""
+	},
+	"a885a4e5723ae14f54809c3a2dd46e28a4e5ff8f": {
+		"name": "dark/red80",
+		"description": ""
+	},
+	"cfbf5cfe42a96ce54d7779f914bc596afd40d4ed": {
+		"name": "dark/red100",
+		"description": ""
+	},
+	"4490169969eb9114ab1a539d393777d5c793505d": {
+		"name": "dark/red200",
+		"description": ""
+	},
+	"0b9757a8fcde0ab72517d356bb6727e29f5b955e": {
+		"name": "dark/red300",
+		"description": ""
+	},
+	"9926aabbbaf3fe70a0bf94aae40a6cbdd0a1126b": {
+		"name": "dark/red400",
+		"description": ""
+	},
+	"3865bad021872e17f356f297a6930e3eee359556": {
+		"name": "dark/red500",
+		"description": ""
+	},
+	"524fd44ff8d5f3c02049e33d61d3e3ab5fe929ad": {
+		"name": "dark/red600",
+		"description": ""
+	},
+	"a69e78c50d49bd0dabbf7a875c2e2c3cf6253b29": {
+		"name": "dark/pink40",
+		"description": ""
+	},
+	"cea07a089ea6a1df6191233c1dec61452bed09c8": {
+		"name": "dark/pink60",
+		"description": ""
+	},
+	"b9ef8990cfd09d8eb9c7c7fa95a06eed541f636e": {
+		"name": "dark/pink80",
+		"description": ""
+	},
+	"0ea5e115cce594a3269d37f0d1c1b9deae466bbe": {
+		"name": "dark/pink100",
+		"description": ""
+	},
+	"1dc704c52a7495a8ef2d3f5213f0954ea151fe2c": {
+		"name": "dark/pink200",
+		"description": ""
+	},
+	"2802e1c733535528f67509fe2c6cef7134dcd1e4": {
+		"name": "dark/pink300",
+		"description": ""
+	},
+	"ca60744716372e6eaf2ca6716a0d01d034a4021f": {
+		"name": "dark/pink400",
+		"description": ""
+	},
+	"1f5cc1b0d3a75fc926bfadba8f22728bb46f6657": {
+		"name": "dark/pink500",
+		"description": ""
+	},
+	"8e54b8989fcc59aeead2f7622c0410dec5c566fb": {
+		"name": "dark/pink600",
+		"description": ""
+	},
+	"05d4244864f7f63be3567b694391293b1d4c8a96": {
+		"name": "dark/purple40",
+		"description": ""
+	},
+	"7d89b645dd815bf7ff6cb949c4c3d5b2d762a560": {
+		"name": "dark/purple60",
+		"description": ""
+	},
+	"ab1737a1c054fb9caf12cd77860089542288a73a": {
+		"name": "dark/purple80",
+		"description": ""
+	},
+	"dca319758ba3c95dfeb4006147b92a6d08e90412": {
+		"name": "dark/purple100",
+		"description": ""
+	},
+	"0f7cf475903f7385a3ab8b23a9c46ff1e2a06c71": {
+		"name": "dark/purple200",
+		"description": ""
+	},
+	"ba5620a5f68e214783558ba6b6002fbdbd05275d": {
+		"name": "dark/purple300",
+		"description": ""
+	},
+	"af268dc9cb1f9a072bd9a216cbe7d317791afdcd": {
+		"name": "dark/purple400",
+		"description": ""
+	},
+	"2d187962a361d0e0ecbb11890405b51354f26f79": {
+		"name": "dark/purple500",
+		"description": ""
+	},
+	"3247c54110b740de706d04c87d995fd2861477a6": {
+		"name": "dark/purple600",
+		"description": ""
+	},
+	"9964a7a7aac026e52d0cb2bd8b395271c2ebcfe4": {
+		"name": "dark/teal40",
+		"description": ""
+	},
+	"ddd6d84222054ad840d6dffbfa35962dbe7557b1": {
+		"name": "dark/teal60",
+		"description": ""
+	},
+	"e9290771b6492c9dcd1ad994fa7bca864af39d7b": {
+		"name": "dark/teal80",
+		"description": ""
+	},
+	"ac1e95c0e1336ca552629c358e2dd82f8e513763": {
+		"name": "dark/teal100",
+		"description": ""
+	},
+	"aa5fb658c7d2b0d30a8ab159ce725f0197f5bb35": {
+		"name": "dark/teal200",
+		"description": ""
+	},
+	"48352021035bf7e886b5bd1821b9507bf681f85a": {
+		"name": "dark/teal300",
+		"description": ""
+	},
+	"716a858eac45925ccdc9bfb0f868c59fa5635bac": {
+		"name": "dark/teal400",
+		"description": ""
+	},
+	"245be8560e0440adc8caf8faac7c82f4ae44a61f": {
+		"name": "dark/teal500",
+		"description": ""
+	},
+	"8a388317f791e2f326b5f3e78be849a999f3383d": {
+		"name": "dark/teal600",
+		"description": ""
+	},
+	"2c7c25fd584220d2e7e2155173a48fd8b2428ef1": {
+		"name": "dark/yellow100",
+		"description": ""
+	},
+	"bfbf00f6ab9c92a38b5357e376cfe64b397af97c": {
+		"name": "dark/yellow600",
+		"description": ""
+	},
+	"6f8fd1c7d66f0a45c680d84b2e2cc0f094511fc7": {
+		"name": "dark/mustard40",
+		"description": ""
+	},
+	"0c5f699f13ba40e8e059932ab4f24b02d79458f5": {
+		"name": "dark/mustard60",
+		"description": ""
+	},
+	"1410fc724d6a90bd461302692d7208920e5c9357": {
+		"name": "dark/mustard80",
+		"description": ""
+	},
+	"92199a92d3ee5b5be66d6cc9c931f341af2fdfb1": {
+		"name": "dark/mustard100",
+		"description": ""
+	},
+	"91b8b926c457227f0bdb5ab959d00bcb357e35d0": {
+		"name": "dark/mustard200",
+		"description": ""
+	},
+	"071ecd360c4cf476f6127b6bbb391b038a645d4a": {
+		"name": "dark/mustard300",
+		"description": ""
+	},
+	"69499c62804785d5ed110766b3c6e7cdd31f06b7": {
+		"name": "dark/mustard400",
+		"description": ""
+	},
+	"0a124a975a2dbd6a80dc1d8bb2cb7f59b8374481": {
+		"name": "dark/mustard500",
+		"description": ""
+	},
+	"0ff45106431db56cb8a7d9193c68b4be72999f06": {
+		"name": "dark/mustard600",
+		"description": ""
 	},
 	"102c1fe6c7fc78d1aff4ac9c40ffcc1374862850": {
 		"name": "static/alpha25-static",
@@ -561,6 +1049,262 @@
 	},
 	"9997b25f67d436bb277efbde1ea2d8c004a7a94c": {
 		"name": "static/vividBlue300-static",
+		"description": ""
+	},
+	"3818135aa9bd26c08e24fee327dd2ce5df4b06f1": {
+		"name": "static/gray700-static",
+		"description": ""
+	},
+	"474816ff189e6fe3a58b2e8169b73db5c2a0af2c": {
+		"name": "static/blue40-static",
+		"description": ""
+	},
+	"0cdb997bbb3b181331c47da4e305d1d659cf99d9": {
+		"name": "static/blue60-static",
+		"description": ""
+	},
+	"f7d67d7a35067d9d5e9570bb80a75243b2ebe3ad": {
+		"name": "static/blue400-static",
+		"description": ""
+	},
+	"29dba4159f382ba6689f0665f78b0a35085ca312": {
+		"name": "static/blue500-static",
+		"description": ""
+	},
+	"6ebc560f6ae0bcfc75a5873ae3b7a61f0e38d77f": {
+		"name": "static/blue600-static",
+		"description": ""
+	},
+	"24259d3ba0a384d2f8098103391a33aaed977fb0": {
+		"name": "static/red40-static",
+		"description": ""
+	},
+	"07c0d2afb2fc6d3964bd08329dbe25c877c093b9": {
+		"name": "static/red60-static",
+		"description": ""
+	},
+	"377dc1301fa5a428909d966f53da4a96011133da": {
+		"name": "static/red400-static",
+		"description": ""
+	},
+	"dc03491a0119f35c4ca9283cc4056d56316ac735": {
+		"name": "static/red500-static",
+		"description": ""
+	},
+	"837ad24735ab2a0762f65a3c6195cd1c48b76f64": {
+		"name": "static/red600-static",
+		"description": ""
+	},
+	"6f9073bfa3ad96711d3762ad31d1d2cba092383e": {
+		"name": "static/pink40-static",
+		"description": ""
+	},
+	"dba75396a2d21cb2895422a7aaa60b408ecff528": {
+		"name": "static/pink60-static",
+		"description": ""
+	},
+	"e904c1809dd49dfbccf3ec09d7dc965aa6c8eb53": {
+		"name": "static/pink80-static",
+		"description": ""
+	},
+	"7b966e26be340e028c2f98a1703a102c0636884e": {
+		"name": "static/pink100-static",
+		"description": ""
+	},
+	"8fa98522c27495efd3b57dee7d5fab10a8ae000b": {
+		"name": "static/pink200-static",
+		"description": ""
+	},
+	"d6204e68857c6e3fad6aa177dc4dba877132aa08": {
+		"name": "static/pink300-static",
+		"description": ""
+	},
+	"efe0c55cef1ca663fd909cdaa2f2596562893417": {
+		"name": "static/pink400-static",
+		"description": ""
+	},
+	"02343d6372eab71513107523248fd717474f6c09": {
+		"name": "static/pink500-static",
+		"description": ""
+	},
+	"3962ef5de74943c34418e63b58553a5c635fc636": {
+		"name": "static/pink600-static",
+		"description": ""
+	},
+	"3f99275d961e6c6951ffc505443b3cfd7dc1e431": {
+		"name": "static/purple40-static",
+		"description": ""
+	},
+	"5496f7290bd03dc426f17a643dcc45976eea118f": {
+		"name": "static/purple60-static",
+		"description": ""
+	},
+	"5cbf95c679594fb3867aafe5518a6a6bdbd134fa": {
+		"name": "static/purple80-static",
+		"description": ""
+	},
+	"d905f0ac6ad5975eaa13d160164c6f636af0fc08": {
+		"name": "static/purple100-static",
+		"description": ""
+	},
+	"6ca641f4b0420d3bfaa330a220fe40f4ca819275": {
+		"name": "static/purple200-static",
+		"description": ""
+	},
+	"9d14ef2388b5a2d8160eb281795bd14b90cb4d1d": {
+		"name": "static/purple300-static",
+		"description": ""
+	},
+	"88cbda0c1f33b2edd354b6c20fc09ae66428fd8b": {
+		"name": "static/purple400-static",
+		"description": ""
+	},
+	"4f9160d08f9609323bebbc2dc6c44d07d9e2ae0d": {
+		"name": "static/purple500-static",
+		"description": ""
+	},
+	"809f05ae1ed8f0f92bde2305f6afb6726c427654": {
+		"name": "static/purple600-static",
+		"description": ""
+	},
+	"b21f1bbac674377eb95f557b15621221800a6c63": {
+		"name": "static/teal40-static",
+		"description": ""
+	},
+	"25576443a0688088c0190720b26738fe649d4c82": {
+		"name": "static/teal60-static",
+		"description": ""
+	},
+	"50bf6c2d3743d8479ce5633fd7c6dad8f83b5832": {
+		"name": "static/teal80-static",
+		"description": ""
+	},
+	"37a65d866908a2c4da7cafd50a4ef55096e06994": {
+		"name": "static/teal100-static",
+		"description": ""
+	},
+	"9d36fe8ca2d68e9aca49e1e0a47a99cbd6fff940": {
+		"name": "static/teal200-static",
+		"description": ""
+	},
+	"56ddea496d7d798bde9dfe92554ba51781fda105": {
+		"name": "static/teal300-static",
+		"description": ""
+	},
+	"ed3a1588319ce7f1b46e137da98f03c2e297187e": {
+		"name": "static/teal400-static",
+		"description": ""
+	},
+	"c427a390599b42a358af7f1b21cecaf08f3b0094": {
+		"name": "static/teal500-static",
+		"description": ""
+	},
+	"5ccc196afd296c0924cd9be8cd0a23a55cd61125": {
+		"name": "static/teal600-static",
+		"description": ""
+	},
+	"0af827d9e5731c73429bc9d3e2354e295437a1cc": {
+		"name": "static/orange40-static",
+		"description": ""
+	},
+	"9a5050f320603ed0d7c1fa88d73824f30647cd2d": {
+		"name": "static/orange60-static",
+		"description": ""
+	},
+	"7b3a5c7e6a55c8f14ce0834d05207620c813d8ac": {
+		"name": "static/orange400-static",
+		"description": ""
+	},
+	"42255065317848186365d1196cd65f317fc2ea86": {
+		"name": "static/orange500-static",
+		"description": ""
+	},
+	"30b39aa502a8bb423a1a209ba9254d5af5320d9b": {
+		"name": "static/orange600-static",
+		"description": ""
+	},
+	"0d8f6192e0df3bc7f2a4913ca0dbd0606a40cb40": {
+		"name": "static/green40-static",
+		"description": ""
+	},
+	"0188b875cb4bd6c71a7ad5a475b61835f404fd17": {
+		"name": "static/green60-static",
+		"description": ""
+	},
+	"b9c569d8cb5a8537a969044a79b97f3155bd156c": {
+		"name": "static/green400-static",
+		"description": ""
+	},
+	"737aaed46f2ddc8c5f804a3b813938e32b5b1acf": {
+		"name": "static/green500-static",
+		"description": ""
+	},
+	"b7332b77f467d0c4e1c67af52f3cca564d5323d4": {
+		"name": "static/green600-static",
+		"description": ""
+	},
+	"b66b8232bfd9659998253959df042338cc27115d": {
+		"name": "static/gold40-static",
+		"description": ""
+	},
+	"2795345c72ccc358da86ff69721e9e5c4c7d473f": {
+		"name": "static/gold60-static",
+		"description": ""
+	},
+	"e05d3ddb42f55b3fe8bb9d4bb8876afaa2193b78": {
+		"name": "static/gold400-static",
+		"description": ""
+	},
+	"836d01f13516370597b39541543ee0efb4ea9f73": {
+		"name": "static/gold500-static",
+		"description": ""
+	},
+	"0a6d4f8cbc83f3cb1bf92799080f89665d416dfd": {
+		"name": "static/gold600-static",
+		"description": ""
+	},
+	"eac1ab2f270a466242476a2cef1e3e79823a4c2e": {
+		"name": "static/yellow100-static",
+		"description": ""
+	},
+	"1a121b46f8a388a3f447b0682ac6b818787dfc40": {
+		"name": "static/yellow600-static",
+		"description": ""
+	},
+	"ef47e3686765f3b49d19052df212eab4c60c4796": {
+		"name": "static/mustard40-static",
+		"description": ""
+	},
+	"2c3ea165907d95772b49ab61f05d286728d9ada7": {
+		"name": "static/mustard60-static",
+		"description": ""
+	},
+	"8da85e4d43fd6209286c6c7d87a67396c3dda155": {
+		"name": "static/mustard80-static",
+		"description": ""
+	},
+	"1dbfd59c0f59ff7761c77f6fcdf8264d786b637e": {
+		"name": "static/mustard100-static",
+		"description": ""
+	},
+	"a23123331bfe001a382d7988fce7f99f1e5265af": {
+		"name": "static/mustard200-static",
+		"description": ""
+	},
+	"d641913aa3eff774a2aeb8074bd885b40a2f846b": {
+		"name": "static/mustard300-static",
+		"description": ""
+	},
+	"d855fc58ac66339a7f0f54c2c81398abb6c49eb6": {
+		"name": "static/mustard400-static",
+		"description": ""
+	},
+	"f5a4eb82a5ffce081077c6946a026de0ff0a4921": {
+		"name": "static/mustard500-static",
+		"description": ""
+	},
+	"e225cf65c2952bb7adef80f17d02a3fd2b03394d": {
+		"name": "static/mustard600-static",
 		"description": ""
 	}
 }
