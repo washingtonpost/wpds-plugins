@@ -9,7 +9,10 @@ import {
   fontWeights,
   lineHeights,
   shadows,
+  light as lightTheme,
+  defaultTheme,
 } from "@washingtonpost/wpds-theme/src/tokens.ts";
+
 const intBase = parseInt(base.split("px")[0]);
 
 function layer(context, selectedLayer) {
@@ -49,33 +52,93 @@ function Asset() {
 
 //Handles shape and group layers
 function handleShapeType(selectedLayer) {
-  let borderRadius;
-  let shadow;
-  borderRadius = handleBorderRadius(selectedLayer);
-  shadow = handleShadow(selectedLayer);
-  let data = {
-    borderRadius: borderRadius,
+  const borderRadius = handleBorderRadius(selectedLayer);
+  const shadow = handleShadow(selectedLayer);
+  const backgroundColor = handleBackgroundColor(selectedLayer);
+  const data = {
+    borderRadius,
     boxShadow: shadow,
+    backgroundColor,
   };
   return { code: JSON.stringify(data, null, 2), language: "json" };
 }
 
+function handleBackgroundColor(selectedLayer) {
+  // use fills to get the background color
+  // if there are no fills, then return transparent
+  if (selectedLayer.fills.length == 0) return "transparent";
+  const colorObject = selectedLayer.fills[0].color;
+  const value = `rgba(${colorObject.r},${colorObject.g},${colorObject.b},${colorObject.a})`;
+  
+  // lightTheme is an object of key value pairs like "alpha25":"rgba(215,215,215,.25)"
+  // find the matching value in the object and return the key
+  // if no match, return the rgba value
+  const lookup = Object.keys(lightTheme).find((key) => lightTheme[key] === value);
+
+  if (lookup) {
+    // defaultTheme={"primary":"$gray20","secondary":"$gray600","cta":"$vividBlue100","disabled":"$alpha25","accessible":"$gray80","subtle":"$gray300","error":"$red100","success":"$green100","warning":"$orange100","signal":"$blue200","onPrimary":"$gray600","onSecondary":"$gray20","onCta":"$gray600-static","onDisabled":"$alpha50","onMessage":"$gray600-static"}
+
+    // if gray20 is value then return $primary
+    const defaultThemeLookup = Object.entries(defaultTheme).find(
+      ([key, value]) => {
+        return value === `$${lookup}`;
+      }
+    );
+
+    if (defaultThemeLookup) {
+      return `$${defaultThemeLookup[0]}`;
+    }
+
+    return `$${lookup}`;
+  }
+
+  return value;
+}
+
+function handleTextColor(selectedLayer) {
+  if (selectedLayer.textStyles.length == 0) return;
+  const colorObject = selectedLayer.textStyles[0].textStyle.color;
+  const value = `rgba(${colorObject.r},${colorObject.g},${colorObject.b},${colorObject.a})`;
+
+  // lightTheme is an object of key value pairs like "alpha25":"rgba(215,215,215,.25)"
+  // find the matching value in the object and return the key
+  // if no match, return the rgba value
+  const lookup = Object.keys(lightTheme).find((key) => lightTheme[key] === value);
+
+  if (lookup) {
+    // defaultTheme={"primary":"$gray20","secondary":"$gray600","cta":"$vividBlue100","disabled":"$alpha25","accessible":"$gray80","subtle":"$gray300","error":"$red100","success":"$green100","warning":"$orange100","signal":"$blue200","onPrimary":"$gray600","onSecondary":"$gray20","onCta":"$gray600-static","onDisabled":"$alpha50","onMessage":"$gray600-static"}
+
+    // if gray20 is value then return $primary
+    const defaultThemeLookup = Object.entries(defaultTheme).find(
+      ([key, value]) => {
+        return value === `$${lookup}`;
+      }
+    );
+
+    if (defaultThemeLookup) {
+      return `$${defaultThemeLookup[0]}`;
+    }
+
+    return `$${lookup}`;
+  }
+
+  return value;
+}
+
 //Handles text layers
 function handleTextType(selectedLayer) {
-  let fontSize;
-  let font;
-  let lineHeight;
-  let fontWeight;
-  fontSize = handleFontSize(selectedLayer);
-  font = handleFont(selectedLayer);
-  lineHeight = handleLineHeight(selectedLayer);
-  fontWeight = handleFontWeight(selectedLayer);
+  const fontSize = handleFontSize(selectedLayer);
+  const font = handleFont(selectedLayer);
+  const lineHeight = handleLineHeight(selectedLayer);
+  const fontWeight = handleFontWeight(selectedLayer);
+  const color = handleTextColor(selectedLayer);
 
-  let data = {
+  const data = {
     fontFamily: font,
     fontSize: fontSize,
     fontWeight: fontWeight,
     lineHeight: lineHeight,
+    color: color,
   };
 
   return { code: JSON.stringify(data, null, 2), language: "json" };
@@ -135,6 +198,7 @@ function handleShadow(selectedLayer) {
   }
   return valueToReturn;
 }
+
 function handleFontWeight(selectedLayer) {
   if (selectedLayer.textStyles.length == 0) return;
   let checkValue = selectedLayer.textStyles[0].textStyle.fontWeight;
